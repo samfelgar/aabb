@@ -28,21 +28,31 @@ class Financeiro extends MY_Controller {
   }
 
   public function inadimplentes() {
+    $date = new DateTime();
+    $this->load->model('lancamento');
+    $this->load->view('header', ['active' => 'financeiro']);
+    $this->load->view('financeiro/pesquisar_inad', ['year' => $date->format('Y')]);
+    $this->load->view('footer');
+  }
+
+  public function inad() {
     try {
       $this->load->model('dao/lancamentoDAO', 'ld');
       $this->load->model('dao/associadoDAO', 'ad');
-      $date = new DateTime();
-      $date->modify('-1 month');
-      $array = [];
-      for ($i = 0; $i < 3; $i++) {
-        $ids = $this->ld->inadimplentes($date->format('Y'), $date->format('m'));
-        for ($j = 0; $j < count($ids); $j++) {
-          $array[] = [$date->format('Y-m-d'), $this->ad->listarMenos($ids[$j])];
-        }
-        $date->modify('-1 month');
+      $year = $this->input->post('ano');
+      $month = $this->input->post('mes');
+      $inad = [];
+      $ids = $this->ld->inadimplentes($year, $month);
+      for ($j = 0; $j < count($ids); $j++) {
+        $inad[] = $this->ad->listarMenos($ids[$j]);
       }
-      print '<pre>' . var_export($array, true) . '</pre>';
-      $this->output->enable_profiler(TRUE);
+      $this->load->view('header', ['active' => 'financeiro']);
+      $this->load->view('financeiro/inadimplentes', [
+        'associados' => $inad,
+        'year' => $year,
+        'month' => $month
+        ]);
+      $this->load->view('footer');
     } catch (Exception $e) {
       $this->error($e);
     }
