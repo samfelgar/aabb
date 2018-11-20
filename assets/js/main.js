@@ -67,6 +67,10 @@ $('.confirm').click(function () {
   return confirm('Deseja completar esta ação?');
 });
 
+$('.logout').click(function () {
+  return confirm('Deseja realmente sair do sistema?');
+});
+
 $(document).ajaxSuccess(function () {
   $('.date').datepicker({
     dateFormat: 'dd/mm/yy',

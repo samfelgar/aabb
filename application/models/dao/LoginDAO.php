@@ -21,6 +21,9 @@ class LoginDAO extends DAO {
       $this->load->model('perfil');
       $this->perfil->setId($r['perfis_id']);
       $l->setPerfil($this->perfil);
+      if (!password_verify($login->getPass(), $l->getPass())) {
+        return false;
+      }
       return $l;
     } catch (Exception $e) {
       throw $e;

@@ -17,11 +17,13 @@ class Login extends CI_Controller {
       $this->login->setUser($this->input->post('login'));
       $this->login->setPass($this->input->post('pass'));
       $result = $this->ld->checkUserPass($this->login);
-      if (!$result || !password_verify($this->login->getPass(), $result->getPass())) {
+      if (!$result) {
         throw new Exception('Usuário ou senha inválidos.');
       }
       session_start();
-      $_SESSION['user'] = $this->login->getUser();
+      $_SESSION['user_id'] = $result->getId();
+      $_SESSION['user'] = $result->getUser();
+      $_SESSION['perfil'] = $result->getPerfil()->getId();
       redirect('/');
     } catch (Exception $e) {
       $msg = $e->getMessage();

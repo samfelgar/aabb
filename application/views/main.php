@@ -1,8 +1,6 @@
 <div class="jumbotron mt-3">
   <h1 class="display-4 text-primary">Associados</h1>
   <p class="lead">Atualmente são <?= $totalAssociados; ?> associados em nossa base. Consulte <a href="#planos">abaixo</a> a receita esperada.</p>
-  <hr class="my-4">
-  <a class="btn btn-primary btn-lg" href="<?= base_url('associados'); ?>">Ver mais</a>
 </div>
 <div class="card" style="width: 18rem;">
   <h5 class="card-header" id="planos">Planos contratados</h5>

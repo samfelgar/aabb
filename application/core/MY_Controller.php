@@ -9,9 +9,9 @@ class MY_Controller extends CI_Controller {
     }
   }
 
-  public function verify() {
+  private function verify() {
     session_start();
-    if (empty($_SESSION['user'])) {
+    if (empty($_SESSION['user_id'])) {
       return false;
     } else {
       return true;
