@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#007bff">
   <title>AABB</title>
+  <link rel="icon" type="image/png" href="<?= base_url('favicon.png'); ?>">
   <link rel="stylesheet" href="<?=base_url('assets/css/jquery-ui.css');?>">
   <link rel="stylesheet" href="<?=base_url('assets/css/jquery-ui.theme.css');?>">
   <link rel="stylesheet" href="<?=base_url('assets/css/bootstrap.min.css');?>">

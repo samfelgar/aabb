@@ -3,9 +3,9 @@
 class Factory extends CI_Model {
 
     private static $connection;
-    private static $user = 'root';
-    private static $pass = '';
-    private static $dsn = 'mysql:host=localhost;dbname=aabb';
+    private static $user = 'aabbmain';
+    private static $pass = 'mgc15370';
+    private static $dsn = 'mysql:host=aabbmain.mysql.dbaas.com.br;dbname=aabbmain';
 
     public static function getConnection() {
         try {
