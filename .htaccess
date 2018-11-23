@@ -5,6 +5,10 @@ suPHP_ConfigPath /home/aabbgarimpo1/
 
 RewriteEngine On
 RewriteBase /admin
+
+RewriteCond %{HTTPS} !on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php/$1 [L]
