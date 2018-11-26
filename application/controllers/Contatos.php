@@ -40,7 +40,7 @@ class Contatos extends MY_Controller {
             $this->endereco->setEstado($this->input->post('estado'));
             $this->endereco->setCep($this->input->post('cep'));
             $this->ed->inserir($this->endereco);
-            redirect('/associados/ver/' . $this->associado->getId());
+            redirect('/associados/editar/' . $this->associado->getId());
         } catch (Exception $ex) {
             $this->error($ex);
         }
