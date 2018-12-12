@@ -6,6 +6,7 @@
   <meta name="theme-color" content="#007bff">
   <title>AABB</title>
   <link rel="icon" type="image/png" href="<?= base_url('favicon.png'); ?>">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="<?=base_url('assets/css/jquery-ui.css');?>">
   <link rel="stylesheet" href="<?=base_url('assets/css/jquery-ui.theme.css');?>">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -49,6 +50,9 @@
           <a href="<?=base_url('logout');?>" class="nav-link logout">Sair</a>
         </li>
       </ul>
+      <span class="ml-auto">
+        <a href="https://correio.fenabb.org.br/" target="_blank" class="text-light" title="E-mail FENABB"><i class="material-icons">mail</i></a>
+      </span>
     </div>
   </nav>
   <div class="container mb-5">
