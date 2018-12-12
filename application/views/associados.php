@@ -1,7 +1,9 @@
 <h3 class="text-primary mt-3">Lista de associados</h3>
 <hr>
-<a href="<?= base_url('associados/novo'); ?>" class="btn btn-outline-primary btn-sm mb-3">Adicionar associado</a>
-<div class="export-btn mb-3 float-right"></div>
+<div class="d-flex">
+  <a href="<?= base_url('associados/novo'); ?>" class="btn btn-outline-primary btn-sm mb-3">Adicionar associado</a>
+  <div class="export-btn mb-3 ml-auto"></div>
+</div>
 <table class="table table-sm table-hover dt">
   <thead>
     <tr>
