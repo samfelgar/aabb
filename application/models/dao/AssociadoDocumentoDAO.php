@@ -7,14 +7,14 @@ class AssociadoDocumentoDAO extends DAO {
     public function inserir(AssociadoDocumento $associadoDocumento) {
         try {
             $sql = 'INSERT INTO associados_documentos (path, associados_id, tipos_documentos_id) VALUES (?,?,?)';
-            $stmt = $this->c->prepare($sql);
-            $result = $stmt->execute([
+            $stm = $this->c->prepare($sql);
+            $result = $stm->execute([
                 $associadoDocumento->getPath(),
                 $associadoDocumento->getAssociado()->getId(),
                 $associadoDocumento->getTipoDocumento()->getId()
             ]);
             if (!$result) {
-                throw new Exception('<strong>[INSERIR ASSOCIADO_DOCUMENTO]</strong> Não foi possível completar a operação. ' . $stmt->errorInfo()[2]);
+                throw new Exception('<strong>[INSERIR ASSOCIADO_DOCUMENTO]</strong> Não foi possível completar a operação. ' . $stm->errorInfo()[2]);
             }
             return $this->c->lastInsertId();
         } catch (Exception $e) {
@@ -25,14 +25,14 @@ class AssociadoDocumentoDAO extends DAO {
     public function alterar(AssociadoDocumento $associadoDocumento) {
         try {
             $sql = 'UPDATE associados_documentos SET path = ?, tipos_documentos_id = ? WHERE id = ?';
-            $stmt = $this->c->prepare($sql);
-            $result = $stmt->execute([
+            $stm = $this->c->prepare($sql);
+            $result = $stm->execute([
                 $associadoDocumento->getPath(),
                 $associadoDocumento->getTipoDocumento()->getId(),
                 $associadoDocumento->getId()
             ]);
             if (!$result) {
-                throw new Exception('<strong>[ALTERAR ASSOCIADO_DOCUMENTO]</strong> Não foi possível completar a operação. ' . $stmt->errorInfo()[2]);
+                throw new Exception('<strong>[ALTERAR ASSOCIADO_DOCUMENTO]</strong> Não foi possível completar a operação. ' . $stm->errorInfo()[2]);
             }
             return $result;
         } catch (Exception $e) {
@@ -43,12 +43,12 @@ class AssociadoDocumentoDAO extends DAO {
     public function excluir(AssociadoDocumento $associadoDocumento) {
         try {
             $sql = 'DELETE FROM associados_documentos WHERE id = ?';
-            $stmt = $this->c->prepare($sql);
-            $result = $stmt->execute([
+            $stm = $this->c->prepare($sql);
+            $result = $stm->execute([
                 $associadoDocumento->getId()
             ]);
             if (!$result) {
-                throw new Exception('<strong>[EXCLUIR ASSOCIADO_DOCUMENTO]</strong> Não foi possível completar a operação. ' . $stmt->errorInfo()[2]);
+                throw new Exception('<strong>[EXCLUIR ASSOCIADO_DOCUMENTO]</strong> Não foi possível completar a operação. ' . $stm->errorInfo()[2]);
             }
             return $result;
         } catch (Exception $e) {
@@ -67,7 +67,7 @@ class AssociadoDocumentoDAO extends DAO {
             . 'WHERE ad.associados_id = ?';
             $stm = $this->c->prepare($sql);
             if (!$stm->execute([$associado->getId()])) {
-                throw new Exception('<strong>[LISTAR ASSOCIADO_DOCUMENTO]</strong> Não foi possível completar a operação. ' . $stmt->errorInfo()[2]);
+                throw new Exception('<strong>[LISTAR ASSOCIADO_DOCUMENTO]</strong> Não foi possível completar a operação. ' . $stm->errorInfo()[2]);
             }
             $result = [];
             while ($r = $stm->fetch(PDO::FETCH_ASSOC)) {
