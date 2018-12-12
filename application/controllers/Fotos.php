@@ -46,7 +46,6 @@ class Fotos extends MY_Controller {
                 throw new Exception("Houve um erro na sua solicitação.");
             }
 
-            $this->load->helper('file');
             $upload = './assets/avatars/';
             $img = str_replace('data:image/png;base64,', '', $photo);
             $img = str_replace(' ', '+', $img);

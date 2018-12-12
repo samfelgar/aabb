@@ -37,6 +37,7 @@ class Associados extends MY_Controller {
             $this->load->model('dao/enderecoDAO', 'ed');
             $this->load->model('dao/planoDAO', 'pd');
             $this->load->model('dao/dependenteDAO', 'dd');
+            $this->load->model('dao/associadoDocumentoDAO', 'add');
             $data = [
                 'active' => 'associados',
                 'associado' => $this->ad->listarPorId($this->associado),
@@ -44,6 +45,7 @@ class Associados extends MY_Controller {
                 'enderecos' => $this->ed->listar($this->associado),
                 'planos' => $this->pd->listar(),
                 'dependentes' => $this->dd->listar($this->associado),
+                'documentos' => $this->add->listar($this->associado)
             ];
             $this->load->template('ver_associado', $data);
         } catch (Exception $ex) {
@@ -58,11 +60,13 @@ class Associados extends MY_Controller {
             $this->load->model('dao/associadoDAO', 'ad');
             $this->load->model('dao/planoDAO', 'pd');
             $this->load->model('dao/dependenteDAO', 'dd');
+            $this->load->model('dao/associadoDocumentoDAO', 'add');
             $data = [
                 'active' => 'associados',
                 'associado' => $this->ad->listarPorId($this->associado),
                 'planos' => $this->pd->listar(),
                 'dependentes' => $this->dd->listar($this->associado),
+                'documentos' => $this->add->listar($this->associado)
             ];
             $this->load->template('editar_associado', $data);
         } catch (Exception $ex) {

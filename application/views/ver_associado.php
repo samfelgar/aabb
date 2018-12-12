@@ -160,6 +160,29 @@
   </div>
   <div class="form-row form-group">
     <div class="col">
+      <label>Ver documentos</label>
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Opções</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($documentos as $documento): ?>
+          <tr>
+            <td><?= $documento->getTipoDocumento()->getDescricao(); ?></td>
+            <td>
+              <a href="<?= base_url($documento->getPath()); ?>" target="_blank" class="btn btn-sm btn-primary">Visualizar</a>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-row form-group">
+    <div class="col">
       <label>Dependentes</label>
       <table class="table table-sm table-hover">
         <thead>

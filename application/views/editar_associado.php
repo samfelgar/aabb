@@ -119,6 +119,35 @@
   </div>
   <div class="form-row form-group">
     <div class="col">
+      <label>Anexar documentos</label>
+      <table class="table table-sm table-hover">
+        <thead>
+          <tr>
+            <th>Documento</th>
+            <th>Opções</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($documentos as $documento): ?>
+          <tr>
+            <td><?= $documento->getTipoDocumento()->getDescricao(); ?></td>
+            <td>
+              <a href="<?= base_url($documento->getPath()); ?>" target="_blank" class="btn btn-sm btn-primary">Visualizar</a>
+              <a href="<?= base_url('documentos/excluir/' . $documento->getId() . '/?from=associados&fromId=' . $associado->getId() . '&path=' . $documento->getPath()); ?>" class="btn btn-sm btn-warning confirm">Apagar</a>
+            </td>
+          </tr>
+          <?php endforeach; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="form-row form-group">
+    <div class="col">
+      <a href="<?= base_url('documentos/novo/?from=associados&id=' . $associado->getId()); ?>" class="btn btn-sm btn-outline-primary">Novo documento</a>
+    </div>
+  </div>
+  <div class="form-row form-group">
+    <div class="col">
       <label>Dependentes</label>
       <div class="dependentes-table"></div>
       <div class="row">
