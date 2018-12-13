@@ -51,7 +51,11 @@
         </li>
       </ul>
       <span class="ml-auto">
-        <a href="https://correio.fenabb.org.br/" target="_blank" class="text-light" title="E-mail FENABB"><i class="material-icons">mail</i></a>
+        <a href="https://correio.fenabb.org.br/" target="_blank" class="btn btn-sm btn-primary" title="E-mail FENABB">
+          <span class="d-lg-none">Acesso ao e-mail</span>
+          <i class="material-icons md-18 d-lg-none">open_in_new</i>
+          <i class="material-icons d-none d-lg-inline">mail</i>
+        </a>
       </span>
     </div>
   </nav>
