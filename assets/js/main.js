@@ -575,7 +575,7 @@ $('.load-photo').click(function() {
     });
 });
 
-function lancamentosPorAno(associadoId, ano = null) {
+function lancamentosPorAno(associadoId, ano) {
     var url = base_url + 'financeiro/lancamentosPorAno/' + associadoId + '/';
     var container = $('.chk-lancamento');
     if (ano) {
