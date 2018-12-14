@@ -1,4 +1,4 @@
-<h3 class="text-primary mt-3">Visão geral de <?= $associado->getNome(); ?></h3>
+<h3 class="text-primary">Visão geral de <?= $associado->getNome(); ?></h3>
 <hr>
 <div class="row form-group">
   <div class="col">

@@ -19,7 +19,7 @@
     </div>
   </div>
 </div>
-<h3 class="text-primary mt-3">Foto de <?= $usuario->getNome(); ?></h3>
+<h3 class="text-primary">Foto de <?= $usuario->getNome(); ?></h3>
 <hr>
 <form action="<?= base_url('fotos/salvar'); ?>" method="post" enctype="multipart/form-data">
   <input type="hidden" name="usuario" value="<?= $usuario->getId(); ?>">

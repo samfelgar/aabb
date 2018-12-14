@@ -79,6 +79,7 @@ class Documentos extends MY_Controller {
                         break;
                     case 'dependentes':
                         $this->load->model('dependente');
+                        $this->load->model('dao/dependenteDAO', 'ddao');
                         $this->load->model('dependenteDocumento');
                         $this->load->model('tipoDocumento');
                         $this->load->model('dao/dependenteDocumentoDAO', 'dd');
@@ -88,7 +89,7 @@ class Documentos extends MY_Controller {
                         $this->dependenteDocumento->setTipoDocumento($this->tipoDocumento);
                         $this->dependenteDocumento->setDependente($this->dependente);
                         $this->dd->inserir($this->dependenteDocumento);
-                        redirect('/associados/editar/' . $id);
+                        redirect('/associados/editar/' . $this->ddao->listarPorId($this->dependente)->getAssociado()->getId() . '/#dependentes');
                         break;
                     default:
                         throw new Exception('Acesso indevido!');
@@ -118,13 +119,37 @@ class Documentos extends MY_Controller {
                 case 'dependentes':
                     $this->load->model('dependenteDocumento');
                     $this->load->model('dao/dependenteDocumentoDAO', 'dd');
+                    $this->load->model('dependente');
+                    $this->load->model('dao/dependenteDAO', 'ddao');
+                    $this->dependente->setId($fromId);
+                    $associadoID = $this->ddao->listarPorId($this->dependente)->getAssociado()->getId();
                     $this->dependenteDocumento->setId($id);
                     $this->dd->excluir($this->dependenteDocumento);
                     unlink($path);
+                    redirect('/associados/editar/' . $associadoID . '/#dependentes');
                     break;
                 default:
                     throw new Exception('Acesso indevido!');
             }
+        } catch (Exception $e) {
+            $this->error($e);
+        }
+    }
+
+    public function porDependente($id = null) {
+        try {
+            if (empty($id)) {
+                throw new Exception('O ID do dependente deve ser informado.');
+            }
+            $edit = $this->input->get('edit');
+            $this->load->model('dependente');
+            $this->load->model('dao/dependenteDocumentoDAO', 'ddd');
+            $this->dependente->setId($id);
+            $this->load->view('documentos_dependente', [
+                'documentos' => $this->ddd->listar($this->dependente),
+                'dependente' => $this->dependente,
+                'edit' => $edit
+            ]);
         } catch (Exception $e) {
             $this->error($e);
         }

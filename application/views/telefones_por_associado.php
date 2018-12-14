@@ -1,4 +1,4 @@
-<table class="table table-sm ">
+<table class="table table-sm">
   <thead>
     <tr>
       <th>DDD</th>
@@ -12,8 +12,12 @@
         <td><?= $telefone->getDdd(); ?></td>
         <td><?= $telefone->getTelefone(); ?></td>
         <td>
-          <button type="button" data-target="<?= base_url('telefones/editar/' . $telefone->getId()); ?>" class="btn btn-outline-primary btn-sm edit-phone"><span data-feather="edit"></span></button>
-          <button type="button" data-target="<?= base_url('telefones/excluir/' . $telefone->getId()); ?>" class="btn btn-outline-danger btn-sm delete-phone"><span data-feather="trash"></span></button>
+          <button type="button" data-target="<?= base_url('telefones/editar/' . $telefone->getId()); ?>" class="btn btn-outline-primary btn-sm edit-phone">
+            <i class="material-icons">edit</i>
+          </button>
+          <button type="button" data-target="<?= base_url('telefones/excluir/' . $telefone->getId()); ?>" class="btn btn-outline-danger btn-sm delete-phone">
+          <i class="material-icons">delete</i>
+          </button>
         </td>
       </tr>
     <?php endforeach; ?>

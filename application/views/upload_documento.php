@@ -1,4 +1,4 @@
-<h3 class="text-primary mt-3">Upload de documento</h3>
+<h3 class="text-primary">Upload de documento</h3>
 <hr>
 <form action="<?= $action; ?>" method="post" enctype="multipart/form-data">
     <div class="form-row form-group">
@@ -19,6 +19,7 @@
     <div class="form-row form-group">
         <div class="col">
             <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="button" class="btn btn-secondary go-back">Voltar</button>
         </div>
     </div>
 </form>

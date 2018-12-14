@@ -16,8 +16,12 @@
         <td><?= $endereco->getBairro(); ?></td>
         <td><?= $endereco->getComplemento(); ?></td>
         <td>
-          <button type="button" data-target="<?= base_url('enderecos/editar/' . $endereco->getId()); ?>" class="btn btn-outline-primary btn-sm edit-address"><span data-feather="edit"></span></button>
-          <button type="button" data-target="<?= base_url('enderecos/excluir/' . $endereco->getId()); ?>" class="btn btn-outline-danger btn-sm delete-address"><span data-feather="trash"></span></button>
+          <button type="button" data-target="<?= base_url('enderecos/editar/' . $endereco->getId()); ?>" class="btn btn-outline-primary btn-sm edit-address">
+            <i class="material-icons">edit</i>
+          </button>
+          <button type="button" data-target="<?= base_url('enderecos/excluir/' . $endereco->getId()); ?>" class="btn btn-outline-danger btn-sm delete-address">
+            <i class="material-icons">delete</i>
+          </button>
         </td>
       </tr>
     <?php endforeach; ?>

@@ -1,4 +1,4 @@
-<h3 class="text-primary mt-3">Contatos de <?= $associado->getNome(); ?></h3>
+<h3 class="text-primary">Contatos de <?= $associado->getNome(); ?></h3>
 <hr>
 <form action="<?= base_url('contatos/salvar'); ?>" method="post">
   <input type="hidden" name="id" value="<?= $associado->getId(); ?>">

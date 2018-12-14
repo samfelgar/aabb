@@ -1,4 +1,4 @@
-<h3 class="text-primary mt-3">Pesquisar associados</h3>
+<h3 class="text-primary">Pesquisar associados</h3>
 <table class="table table-hover table-sm dt">
   <thead>
     <th>id</th>

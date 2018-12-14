@@ -70,7 +70,7 @@ class DependenteDocumentoDAO extends DAO {
                 throw new Exception('<strong>[LISTAR DEPENDENTE_DOCUMENTO]</strong> Não foi possível completar a operação. ' . $stmt->errorInfo()[2]);
             }
             $result = [];
-            while ($r = $stm->fecth(PDO::FETCH_ASSOC)) {
+            while ($r = $stm->fetch(PDO::FETCH_ASSOC)) {
                 $dependenteDocumento = new DependenteDocumento();
                 $tipoDocumento = new TipoDocumento();
                 $dependenteDocumento->setId($r['id']);

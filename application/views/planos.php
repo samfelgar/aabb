@@ -1,4 +1,4 @@
-<h3 class="text-primary mt-3">Administração de planos de associados</h3>
+<h3 class="text-primary">Administração de planos de associados</h3>
 <button class="btn btn-outline-primary btn-sm mb-3">Adicionar plano</button>
 <table class="table dt">
     <thead>

@@ -1,4 +1,4 @@
-<h3 class="text-primary mt-3">Selecione o período desejado</h3>
+<h3 class="text-primary">Selecione o período desejado</h3>
 <form action="<?= base_url('financeiro/inadimplentes/visualizar'); ?>" method="post">
 <div class="row form-group">
     <div class="col-2">

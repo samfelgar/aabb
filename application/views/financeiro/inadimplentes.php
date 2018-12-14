@@ -1,4 +1,4 @@
-<h3 class="text-primary mt-3">Inadimplentes de <?= $month . '/' . $year; ?></h3>
+<h3 class="text-primary">Inadimplentes de <?= $month . '/' . $year; ?></h3>
 <div class="row">
     <div class="col">
         <table class="table table-sm table-hover dt">

@@ -1,4 +1,4 @@
-<h3 class="text-primary mt-3">Lista de associados</h3>
+<h3 class="text-primary">Lista de associados</h3>
 <hr>
 <div class="d-flex">
   <a href="<?= base_url('associados/novo'); ?>" class="btn btn-outline-primary btn-sm mb-3">Adicionar associado</a>
