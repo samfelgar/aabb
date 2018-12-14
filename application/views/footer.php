@@ -16,7 +16,7 @@ var base_url = '<?= base_url(); ?>';
 <script src="<?= base_url('assets/js/buttons.html5.min.js'); ?>"></script>
 <script src="<?= base_url('assets/js/mask.js'); ?>"></script>
 <script src="<?= base_url('assets/js/print.js'); ?>"></script>
-<script src="<?= base_url('assets/js/feather.js'); ?>"></script>
+<script src="https://unpkg.com/feather-icons"></script>
 <script src="<?= base_url('assets/js/main.js'); ?>"></script>
 </body>
 </html>
