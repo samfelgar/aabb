@@ -52,6 +52,6 @@
 </div>
 <div class="row form-group">
   <div class="col">
-    <a href="<?= base_url('financeiro'); ?>" class="btn btn-secondary">Voltar</a>
+    <button type="button" class="btn btn-secondary go-back">Voltar</button>
   </div>
 </div>

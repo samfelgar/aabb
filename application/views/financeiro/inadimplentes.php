@@ -8,6 +8,7 @@
                 <th>CPF</th>
                 <th>Forma de pagamento</th>
                 <th>Plano</th>
+                <th>Detalhes</th>
             </thead>
             <tbody>
             <?php foreach ($associados as $associado): ?>
@@ -15,8 +16,9 @@
                     <td><?= $associado->getId(); ?></td>
                     <td><?= $associado->getNome(); ?></td>
                     <td><?= $associado->getCpf(); ?></td>
-                    <td><?= $associado->getFormaPagamento(); ?></td>
+                    <td class="text-capitalize"><?= $associado->getFormaPagamento(); ?></td>
                     <td><?= $associado->getPlano()->getDescricao(); ?></td>
+                    <td><a href="<?= base_url('financeiro/overview/' . $associado->getId()); ?>">Ver mais</a></td>
                 </tr>
             <?php endforeach; ?>
             </tbody>

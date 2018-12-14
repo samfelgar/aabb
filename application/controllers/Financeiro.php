@@ -43,8 +43,8 @@ class Financeiro extends MY_Controller {
         try {
             $this->load->model('dao/lancamentoDAO', 'ld');
             $this->load->model('dao/associadoDAO', 'ad');
-            $year = $this->input->post('ano');
-            $month = $this->input->post('mes');
+            $year = $this->input->get('ano');
+            $month = $this->input->get('mes');
             $inad = [];
             $ids = $this->ld->inadimplentes($year, $month);
             for ($j = 0; $j < count($ids); $j++) {
