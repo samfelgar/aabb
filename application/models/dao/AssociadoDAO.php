@@ -78,13 +78,13 @@ class AssociadoDAO extends DAO {
     }
   }
 
-  public function listar($status = 1) {
+  public function listar($status = 1, $order = 'a.nome') {
     try {
       $sql = 'select a.id, a.nome, a.cpf, a.rg, a.nascimento, a.estado_civil, a.email, a.agencia, a.conta, a.tipo_conta, a.data_associacao, '
       . 'a.forma_pagamento, a.status, a.planos_id, p.descricao, p.valor from associados a '
       . 'inner join planos p on a.planos_id = p.id '
       . 'where a.status = ? '
-      . 'order by a.nome';
+      . 'order by ' . $order;
       $stmt = $this->c->prepare($sql);
       if (!$stmt->execute(array($status))) {
         throw new PDOException('<strong>[LISTAR ASSOCIADO]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
