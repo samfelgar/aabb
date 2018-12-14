@@ -29,8 +29,14 @@ class Plano extends CI_Model {
         $this->descricao = $descricao;
     }
 
-    public function setValor($valor) {
-        $this->valor = $valor;
+    public function setValor($valor, $toEng = false) {
+        if ($toEng) {
+            $valor = str_replace('.', '', $valor);
+            $valor = str_replace(',', '.', $valor);
+            $this->valor = $valor;
+        } else {
+            $this->valor = $valor;
+        }
     }
 
 }

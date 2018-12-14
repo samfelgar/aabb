@@ -61,6 +61,23 @@ class PlanoDAO extends DAO {
         }
     }
 
+    public function listarPorId(Plano $plano) {
+        try {
+            $sql = 'SELECT * FROM planos WHERE id = ?';
+            $stm = $this->c->prepare($sql);
+            if (!$stm->execute([$plano->getId()])) {
+                throw new PDOException('<strong>[LISTAR PLANOS POR ID]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
+            }
+            $r = $stm->fetch(PDO::FETCH_ASSOC);
+            $this->load->model('plano');
+            $this->plano->setDescricao($r['descricao']);
+            $this->plano->setValor($r['valor']);
+            return $this->plano;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
     public function delete(Plano $plano) {
         try {
             $sql = 'delete from planos where id = ?';

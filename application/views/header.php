@@ -27,11 +27,11 @@
         <?php foreach ($menus as $menu): ?>
           <?php if (count($menu) == 1): ?>
             <li class="nav-item">
-              <a class="nav-link" href="<?= base_url($menu[0]->getUrl()); ?>"><?= $menu[0]->getDescricao(); ?></a>
+              <a class="nav-link <?=($active == strtolower($menu[0]->getDescricao())) ? 'active' : '';?>" href="<?= base_url($menu[0]->getUrl()); ?>"><?= $menu[0]->getDescricao(); ?></a>
             </li>
           <?php else: ?>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"><?= $menu[0]->getDescricao(); ?></a>
+              <a class="nav-link dropdown-toggle <?=($active == strtolower($menu[0]->getDescricao())) ? 'active' : '';?>" href="#" data-toggle="dropdown"><?= $menu[0]->getDescricao(); ?></a>
               <div class="dropdown-menu">
                 <?php foreach ($menu as $k => $v): ?>
                   <?php if ($k == 0) continue; ?>

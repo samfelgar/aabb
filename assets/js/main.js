@@ -56,6 +56,9 @@ function applyMask() {
     $('.ddd').mask('00');
     $('.cep').mask('00.000-000');
     $('.date').mask('00/00/0000');
+    $('.money').mask('#.##0,00', {
+        reverse: true
+    });
 }
 applyMask();
 
