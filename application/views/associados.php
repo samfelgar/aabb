@@ -1,6 +1,6 @@
 <h3 class="text-primary">Lista de associados</h3>
 <hr>
-<div class="d-flex">
+<div class="d-flex align-items-center">
   <a href="<?= base_url('associados/novo'); ?>" class="btn btn-outline-primary btn-sm mb-3">Adicionar associado</a>
   <div class="export-btn mb-3 ml-auto"></div>
 </div>
