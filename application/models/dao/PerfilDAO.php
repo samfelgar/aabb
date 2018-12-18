@@ -58,9 +58,27 @@ class PerfilDAO extends DAO {
         }
     }
 
+    public function listarPorId(Perfil $perfil) {
+        try {
+            $sql = 'select * from perfis where id = ?';
+            $stmt = $this->c->prepare($sql);
+            if (!$stmt->execute([$perfil->getId()])) {
+                throw new PDOException('<strong>[LISTAR PERFIS]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
+            }
+            $r = $stmt->fetch(PDO::FETCH_ASSOC);
+            $this->load->model('perfil');
+            $perfil = new Perfil();
+            $perfil->setId($r['id']);
+            $perfil->setDescricao($r['descricao']);
+            return $perfil;
+        } catch (Exception $ex) {
+            throw $ex;
+        }
+    }
+
     public function delete(Perfil $perfil) {
         try {
-            $sql = 'delete from perfil where id = ?';
+            $sql = 'delete from perfis where id = ?';
             $stmt = $this->c->prepare($sql);
             $result = $stmt->execute(array(
                 $perfil->getId()
