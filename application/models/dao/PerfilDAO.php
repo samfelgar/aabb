@@ -66,6 +66,9 @@ class PerfilDAO extends DAO {
                 throw new PDOException('<strong>[LISTAR PERFIS]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
             }
             $r = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (empty($r)) {
+                throw new PDOException('<strong>[LISTAR PERFIS]</strong> Não foram retornados dados.');
+            }
             $this->load->model('perfil');
             $perfil = new Perfil();
             $perfil->setId($r['id']);
