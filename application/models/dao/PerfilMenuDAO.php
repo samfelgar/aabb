@@ -91,10 +91,9 @@ class PerfilMenuDAO extends DAO {
 
     public function listarMenusSemAcesso(Perfil $perfil) {
         try {
-            $sql = 'select menus.* from menus'
-            . ' inner join perfis_menus on menus.id = perfis_menus.menus_id'
-            . ' where perfis_menus.menus_id NOT IN (SELECT perfis_menus.menus_id FROM perfis_menus WHERE perfis_menus.perfis_id = ?)'
-            . ' group by menus.id';
+            $sql = 'select * from menus'
+            . ' where id NOT IN (SELECT menus_id FROM perfis_menus WHERE perfis_id = ?)'
+            . ' group by id';
             $stmt = $this->c->prepare($sql);
             if (!$stmt->execute([$perfil->getId()])) {
                 throw new PDOException('<strong>[LISTAR PERFIS]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
