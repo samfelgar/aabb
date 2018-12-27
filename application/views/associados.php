@@ -1,7 +1,7 @@
 <h3 class="text-primary">Lista de associados</h3>
 <hr>
 <div class="d-flex align-items-center mb-3">
-    <a href="<?= base_url('associados/novo'); ?>" class="btn btn-outline-primary btn-sm">Adicionar associado</a>
+    <a href="<?= base_url('associados/pesquisar_associado'); ?>" class="btn btn-outline-primary btn-sm">Adicionar associado</a>
     <!-- <div class="export-btn ml-auto"></div> -->
 </div>
 <table class="table table-sm table-hover dt">
