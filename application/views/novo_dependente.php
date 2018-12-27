@@ -9,7 +9,7 @@
         </div>
         <div class="form-group col-sm-4">
             <label>Data de nascimento</label>
-            <input type="text" name="nascimento" class="form-control date" required="">
+            <input type="text" name="nascimento" class="form-control date" required="" autocomplete="off">
         </div>
     </div>
     <div class="form-row">

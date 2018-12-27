@@ -8,7 +8,7 @@
         </div>
         <div class="col-sm-4 form-group">
             <label>Data de nascimento</label>
-            <input type="text" name="nascimento" class="form-control date" required="" value="<?= $dependente->getNascimento(true); ?>">
+            <input type="text" name="nascimento" class="form-control date" required="" value="<?= $dependente->getNascimento(true); ?>" autocomplete="off">
         </div>
     </div>
     <div class="form-row">

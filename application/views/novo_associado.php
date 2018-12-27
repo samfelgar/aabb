@@ -32,11 +32,11 @@
         </div>
         <div class="col">
             <label for="nascimento">Data de nascimento</label>
-            <input type="text" name="nascimento" id="nascimento" class="form-control date" required="">
+            <input type="text" name="nascimento" id="nascimento" class="form-control date" required="" autocomplete="off">
         </div>
         <div class="col">
             <label for="data-associacao">Membro desde</label>
-            <input type="text" name="data-associacao" id="data-associacao" class="form-control date" required="">
+            <input type="text" name="data-associacao" id="data-associacao" class="form-control date" required="" autocomplete="off">
         </div>
         <div class="col">
             <label for="plano">Plano</label>

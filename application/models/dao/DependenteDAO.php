@@ -104,6 +104,20 @@ class DependenteDAO extends DAO {
     }
   }
 
+  public function pesquisarCPF($cpf) {
+    try {
+      $sql = 'SELECT cpf from dependentes WHERE cpf = ?';
+      $stm = $this->c->prepare($sql);
+      if (!$stm->execute([$cpf])) {
+        throw new Exception('<strong>[PESQUISA CPF]</strong> Não foi possível completar a operação. ' . $stmt->errorInfo()[2]);
+      }
+      $r = $stm->fetchAll(PDO::FETCH_ASSOC);
+      return count($r);
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   public function buscarFoto(Dependente $dependente) {
     try {
       $sql = 'select photo from dependentes where id = ?';

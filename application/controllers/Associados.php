@@ -23,16 +23,12 @@ class Associados extends MY_Controller {
 
     public function novo() {
         try {
-            $this->load->model('dao/associadoDAO');
             $this->load->model('dao/planoDAO', 'pd');
             $cpf = $this->input->post('cpf');
             if (empty($cpf)) {
                 throw new Exception('É necessário pesquisar o CPF primeiro.');
             }
-            $qtdCPF = $this->associadoDAO->pesquisarCPF($cpf);
-            if ($qtdCPF > 0) {
-                throw new Exception('Já existe um associado cadastrado com o CPF informado (' . $cpf . ').');
-            }
+            $this->verificar_cpf($cpf);
             $data = [
                 'active' => 'associados',
                 'planos' => $this->pd->listar(),
@@ -111,10 +107,12 @@ class Associados extends MY_Controller {
             $this->plano->setId($this->input->post('plano'));
             $this->associado->setPlano($this->plano);
             if (!empty($id)) {
+                $this->verificar_cpf($this->associado->getCpf(), 1); //Validando o CPF
                 $this->associado->setId($id);
                 $this->ad->alterar($this->associado);
                 redirect('/associados/ver/' . $id);
             } else {
+                $this->verificar_cpf($this->associado->getCpf()); //Validando o CPF
                 $lastId = $this->ad->inserir($this->associado);
                 if (empty($lastId)) {
                     throw new Exception("O associado não foi registrado corretamente.");
@@ -135,6 +133,22 @@ class Associados extends MY_Controller {
             redirect('/associados');
         } catch (Exception $e) {
             $this->error($e);
+        }
+    }
+
+    private function verificar_cpf($cpf, $qtd = 0) {
+        try {
+            $this->load->library('validador_cpf');
+            if (!$this->validador_cpf->validar($cpf)) {
+                throw new Exception('O CPF informado não é válido.');
+            }
+            $this->load->model('dao/associadoDAO');
+            $qtdCPF = $this->associadoDAO->pesquisarCPF($cpf);
+            if ($qtdCPF > $qtd) {
+                throw new Exception('Já existe um associado cadastrado com o CPF informado (' . $cpf . ').');
+            }
+        } catch (Exception $e) {
+            throw $e;
         }
     }
 

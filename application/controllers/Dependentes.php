@@ -8,11 +8,9 @@ class Dependentes extends MY_Controller {
             if (empty($id)) {
                 throw new Exception('Não é possível acessar esta página.');
             }
-
             $this->load->model('associado');
             $this->load->model('dao/associadoDAO', 'ad');
             $this->associado->setId($id);
-
             $this->load->template('novo_dependente', [
                 'active' => 'associados',
                 'associado' => $this->ad->listarMenos($this->associado)
@@ -29,7 +27,7 @@ class Dependentes extends MY_Controller {
             $this->dependente->setId($id);
             $data = [
                 'active' => 'associados',
-                'dependente' => $this->dd->listarPorId($this->dependente),
+                'dependente' => $this->dd->listarPorId($this->dependente)
             ];
             $this->load->template('editar_dependente', $data);
         } catch (Exception $e) {
@@ -62,11 +60,13 @@ class Dependentes extends MY_Controller {
             $this->dependente->setParentesco($this->input->post('parentesco'));
             $associadoID = null;
             if (empty($idDependente)) {
+                $this->verificar_cpf($this->dependente->getCpf()); //Verificando o CPF
                 $this->associado->setId($this->input->post('associado-id'));
                 $associadoID = $this->associado->getId();
                 $this->dependente->setAssociado($this->associado);
                 $this->dd->inserir($this->dependente);
             } else {
+                $this->verificar_cpf($this->dependente->getCpf(), 1); //Verificando o CPF
                 $this->dependente->setId($idDependente);
                 $this->dd->alterar($this->dependente);
                 $associadoID = $this->dd->listarPorId($this->dependente)->getAssociado()->getId();
@@ -112,6 +112,22 @@ class Dependentes extends MY_Controller {
                 'error' => $e->getMessage(),
             );
             print json_encode($data);
+        }
+    }
+
+    private function verificar_cpf($cpf, $qtd = 0) {
+        try {
+            $this->load->library('validador_cpf');
+            if (!$this->validador_cpf->validar($cpf)) {
+                throw new Exception('O CPF informado não é válido.');
+            }
+            $this->load->model('dao/dependenteDAO');
+            $qtdCPF = $this->dependenteDAO->pesquisarCPF($cpf);
+            if ($qtdCPF > $qtd) {
+                throw new Exception('Já existe um dependente cadastrado com o CPF informado (' . $cpf . ').');
+            }
+        } catch (Exception $e) {
+            throw $e;
         }
     }
 

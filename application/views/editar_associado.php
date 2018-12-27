@@ -62,11 +62,11 @@
         </div>
         <div class="col-sm form-group">
             <label for="nascimento">Data de nascimento</label>
-            <input type="text" name="nascimento" id="nascimento" class="form-control date" value="<?= $associado->getNascimento(true); ?>" required="">
+            <input type="text" name="nascimento" id="nascimento" class="form-control date" value="<?= $associado->getNascimento(true); ?>" required="" autocomplete="off">
         </div>
         <div class="col-sm form-group">
             <label for="data-associacao">Membro desde</label>
-            <input type="text" name="data-associacao" id="data-associacao" class="form-control date" value="<?= $associado->getDataAssociacao(true); ?>" required="">
+            <input type="text" name="data-associacao" id="data-associacao" class="form-control date" value="<?= $associado->getDataAssociacao(true); ?>" required="" autocomplete="off">
         </div>
         <div class="col-sm form-group">
             <label for="plano">Plano</label>
@@ -194,7 +194,7 @@
                             </button>
                         </td>
                         <td>
-                            <a href="<?=base_url('dependentes/editar/' . $dependente->getId() . '/?id=' . $associado->getId());?>" class="btn btn-outline-primary btn-sm">
+                            <a href="<?=base_url('dependentes/editar/' . $dependente->getId());?>" class="btn btn-outline-primary btn-sm">
                                 <i class="material-icons">edit</i>
                             </a>
                             <a href="<?=base_url('dependentes/excluir/' . $dependente->getId() . '/?id=' . $associado->getId());?>" class="btn btn-outline-danger btn-sm confirm">
