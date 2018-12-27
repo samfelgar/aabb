@@ -179,6 +179,20 @@ class AssociadoDAO extends DAO {
     }
   }
 
+  public function pesquisarCPF($cpf) {
+    try {
+      $sql = 'SELECT cpf from associados WHERE cpf = ?';
+      $stm = $this->c->prepare($sql);
+      if (!$stm->execute([$cpf])) {
+        throw new Exception('<strong>[PESQUISA CPF]</strong> Não foi possível completar a operação. ' . $stmt->errorInfo()[2]);
+      }
+      $r = $stm->fetchAll(PDO::FETCH_ASSOC);
+      return count($r);
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
   public function numeroDeAssociados() {
     try {
       $sql = 'select count(id) as total from associados where status = 1';

@@ -8,7 +8,7 @@
         </div>
         <div class="col">
             <label for="cpf">CPF</label>
-            <input type="text" name="cpf" id="cpf" class="form-control cpf" required="">
+            <input type="text" name="cpf" id="cpf" class="form-control cpf" readonly="" required="" value="<?= $cpf; ?>">
         </div>
         <div class="col">
             <label for="rg">RG</label>

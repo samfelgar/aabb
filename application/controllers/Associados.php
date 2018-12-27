@@ -15,12 +15,28 @@ class Associados extends MY_Controller {
         }
     }
 
+    public function pesquisar_associado() {
+        $this->load->template('pesquisar_cpf', [
+            'active' => 'associados'
+        ]);
+    }
+
     public function novo() {
         try {
+            $this->load->model('dao/associadoDAO');
             $this->load->model('dao/planoDAO', 'pd');
+            $cpf = $this->input->post('cpf');
+            if (empty($cpf)) {
+                throw new Exception('É necessário pesquisar o CPF primeiro.');
+            }
+            $qtdCPF = $this->associadoDAO->pesquisarCPF($cpf);
+            if ($qtdCPF > 0) {
+                throw new Exception('Já existe um associado cadastrado com o CPF informado (' . $cpf . ').');
+            }
             $data = [
                 'active' => 'associados',
                 'planos' => $this->pd->listar(),
+                'cpf' => $cpf
             ];
             $this->load->template('novo_associado', $data);
         } catch (Exception $ex) {
