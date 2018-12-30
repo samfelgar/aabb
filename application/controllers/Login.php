@@ -24,7 +24,11 @@ class Login extends CI_Controller {
       $_SESSION['user_id'] = $result->getId();
       $_SESSION['user'] = $result->getUser();
       $_SESSION['perfil'] = $result->getPerfil()->getId();
-      redirect('/');
+      if ($_SESSION['perfil'] == 3) {
+        redirect('/portaria');
+      } else {
+        redirect('/');
+      }
     } catch (Exception $e) {
       $msg = $e->getMessage();
       $this->index($msg);

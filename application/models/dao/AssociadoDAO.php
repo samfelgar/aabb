@@ -154,6 +154,9 @@ class AssociadoDAO extends DAO {
         throw new PDOException('<strong>[LISTAR ASSOCIADO]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
       }
       $r = $stmt->fetch(PDO::FETCH_ASSOC);
+      if (empty($r)) {
+        throw new Exception('<strong>[LISTAR ASSOCIADO]</strong> Não foram encontrados resultados.');
+      }
       $associado->setNome($r['nome']);
       $associado->setCpf($r['cpf']);
       $associado->setRg($r['rg']);
@@ -176,6 +179,81 @@ class AssociadoDAO extends DAO {
       return $associado;
     } catch (Exception $ex) {
       throw $ex;
+    }
+  }
+
+  public function listarPorCPF(Associado $associado) {
+    try {
+      $sql = 'select a.*, p.descricao, p.valor from associados a '
+      . 'inner join planos p on a.planos_id = p.id '
+      . 'where a.cpf = ?';
+      $stmt = $this->c->prepare($sql);
+      if (!$stmt->execute(array($associado->getCpf()))) {
+        throw new PDOException('<strong>[LISTAR ASSOCIADO]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
+      }
+      $r = $stmt->fetch(PDO::FETCH_ASSOC);
+      $associado->setId($r['id']);
+      $associado->setNome($r['nome']);
+      $associado->setCpf($r['cpf']);
+      $associado->setRg($r['rg']);
+      $associado->setNascimento($r['nascimento']);
+      $associado->setEstadoCivil($r['estado_civil']);
+      $associado->setEmail($r['email']);
+      $associado->setAgencia($r['agencia']);
+      $associado->setConta($r['conta']);
+      $associado->setTipoConta($r['tipo_conta']);
+      $associado->setDataAssociacao($r['data_associacao']);
+      $associado->setFormaPagamento($r['forma_pagamento']);
+      $associado->setStatus($r['status']);
+      $associado->setPhoto($r['photo']);
+      $this->load->model('plano');
+      $plano = new Plano();
+      $plano->setId($r['planos_id']);
+      $plano->setDescricao($r['descricao']);
+      $plano->setValor($r['valor']);
+      $associado->setPlano($plano);
+      return $associado;
+    } catch (Exception $ex) {
+      throw $ex;
+    }
+  }
+
+  public function listarPorNome(Associado $associado) {
+    try {
+      $sql = 'SELECT * FROM associados WHERE nome LIKE ?';
+      $stm = $this->c->prepare($sql);
+      $params = [
+        '%' . $associado->getNome() . '%'
+      ];
+      if (! $stm->execute($params)) {
+        throw new Exception('[ASSOCIADO_POR_NOME] Houve um problema no processamento da sua solicitação.');
+      }
+      $result = array();
+      while ($r = $stm->fetch(PDO::FETCH_ASSOC)) {
+        $this->load->model('associado');
+        $this->load->model('plano');
+        $associado = new Associado();
+        $associado->setId($r['id']);
+        $associado->setNome($r['nome']);
+        $associado->setCpf($r['cpf']);
+        $associado->setRg($r['rg']);
+        $associado->setNascimento($r['nascimento']);
+        $associado->setEstadoCivil($r['estado_civil']);
+        $associado->setEmail($r['email']);
+        $associado->setAgencia($r['agencia']);
+        $associado->setConta($r['conta']);
+        $associado->setTipoConta($r['tipo_conta']);
+        $associado->setDataAssociacao($r['data_associacao']);
+        $associado->setFormaPagamento($r['forma_pagamento']);
+        $associado->setStatus($r['status']);
+        $plano = new Plano();
+        $plano->setId($r['planos_id']);
+        $associado->setPlano($plano);
+        $result[] = $associado;
+      }
+      return $result;
+    } catch (Exception $e) {
+      throw $e;
     }
   }
 

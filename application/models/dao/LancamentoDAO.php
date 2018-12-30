@@ -61,12 +61,13 @@ class LancamentoDAO extends DAO {
     }
   }
 
-  public function ultimosLancamentos(Associado $associado) {
+  public function ultimosLancamentos(Associado $associado, $interval = 12) {
     try {
-      $sql = 'select * from lancamentos where data >= date_sub(curdate(), interval 12 month) and associados_id = ? '
+      $sql = 'select * from lancamentos where data >= date_sub(curdate(), interval ? month) and associados_id = ? '
       . 'order by data desc';
       $stmt = $this->c->prepare($sql);
       $stmt->execute([
+        $interval,
         $associado->getId()
       ]);
       $result = [];

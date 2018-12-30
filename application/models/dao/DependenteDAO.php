@@ -91,6 +91,9 @@ class DependenteDAO extends DAO {
         throw new PDOException('<strong>[LISTAR DEPENDENTE]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
       }
       $r = $stmt->fetch(PDO::FETCH_ASSOC);
+      if (empty($r)) {
+        throw new Exception('<strong>[LISTAR DEPENDENTE]</strong> Não foram encontrados resultados.');
+      }
       $dependente->setNome($r['nome']);
       $dependente->setNascimento($r['nascimento']);
       $dependente->setCpf($r['cpf']);
@@ -101,6 +104,61 @@ class DependenteDAO extends DAO {
       return $dependente;
     } catch (Exception $ex) {
       throw $ex;
+    }
+  }
+
+  public function listarPorCPF(Dependente $dependente) {
+    try {
+      $sql = 'select * from dependentes where cpf = ?';
+      $stmt = $this->c->prepare($sql);
+      if (!$stmt->execute(array($dependente->getCpf()))) {
+        throw new PDOException('<strong>[LISTAR DEPENDENTE]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
+      }
+      $r = $stmt->fetch(PDO::FETCH_ASSOC);
+      $dependente = new Dependente();
+      $dependente->setId($r['id']);
+      $dependente->setNome($r['nome']);
+      $dependente->setNascimento($r['nascimento']);
+      $dependente->setCpf($r['cpf']);
+      $dependente->setParentesco($r['parentesco']);
+      $this->load->model('associado');
+      $associado = new Associado();
+      $associado->setId($r['associados_id']);
+      $dependente->setAssociado($associado);
+      return $dependente;
+    } catch (Exception $ex) {
+      throw $ex;
+    }
+  }
+
+  public function listarPorNome(Dependente $dependente) {
+    try {
+      $sql = 'SELECT * FROM dependentes WHERE nome LIKE ?';
+      $stm = $this->c->prepare($sql);
+      $params = [
+        '%' . $dependente->getNome() . '%'
+      ];
+      if (! $stm->execute($params)) {
+        throw new Exception('[DEPENDENTE_POR_NOME] Houve um problema no processamento da sua solicitação.');
+      }
+      $result = array();
+      while ($r = $stm->fetch(PDO::FETCH_ASSOC)) {
+        $this->load->model('dependente');
+        $this->load->model('associado');
+        $dependente = new Dependente();
+        $dependente->setId($r['id']);
+        $dependente->setNome($r['nome']);
+        $dependente->setNascimento($r['nascimento']);
+        $dependente->setCpf($r['cpf']);
+        $dependente->setParentesco($r['parentesco']);
+        $associado = new Associado();
+        $associado->setId($r['associados_id']);
+        $dependente->setAssociado($associado);
+        $result[] = $dependente;
+      }
+      return $result;
+    } catch (Exception $e) {
+      throw $e;
     }
   }
 
