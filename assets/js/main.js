@@ -603,3 +603,8 @@ $('select[name="ano"]').change(function() {
     var id = $('#associado-id').val();
     lancamentosPorAno(id, $(this).val());
 });
+
+// Script da página do leitor do arquivo de retorno
+$('#warning-modal').modal({
+    'backdrop': 'static'
+});

@@ -257,6 +257,33 @@ class AssociadoDAO extends DAO {
     }
   }
 
+  public function listarPorAgenciaConta(Associado $associado) {
+    try {
+      $sql = 'select a.id, a.nome, a.cpf, a.status, p.valor from associados a '
+      . 'inner join planos p on a.planos_id = p.id '
+      . 'where a.agencia = ? and a.conta = ?';
+      $stmt = $this->c->prepare($sql);
+      if (!$stmt->execute(array($associado->getAgencia(), $associado->getConta()))) {
+        throw new PDOException('<strong>[LISTAR ASSOCIADO]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);
+      }
+      $r = $stmt->fetch(PDO::FETCH_ASSOC);
+      if (empty($r)) {
+        return false;
+      }
+      $associado->setId($r['id']);
+      $associado->setNome($r['nome']);
+      $associado->setCpf($r['cpf']);
+      $associado->setStatus($r['status']);
+      $this->load->model('plano');
+      $plano = new Plano();
+      $plano->setValor($r['valor']);
+      $associado->setPlano($plano);
+      return $associado;
+    } catch (Exception $ex) {
+      throw $ex;
+    }
+  }
+
   public function pesquisarCPF($cpf) {
     try {
       $sql = 'SELECT cpf from associados WHERE cpf = ?';

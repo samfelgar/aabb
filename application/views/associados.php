@@ -4,7 +4,7 @@
     <a href="<?= base_url('associados/pesquisar_associado'); ?>" class="btn btn-outline-primary btn-sm">Adicionar associado</a>
     <!-- <div class="export-btn ml-auto"></div> -->
 </div>
-<table class="table table-sm table-hover dt">
+<table class="table table-sm table-hover table-responsive-sm dt">
     <thead>
         <tr>
             <th>Nome</th>

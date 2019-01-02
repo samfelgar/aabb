@@ -14,7 +14,7 @@ class Portaria extends MY_Controller {
                     $this->load->model('barcode');
                     $result = $this->barcode->ler($search);
                     $data['result'] = $result;
-                    $data['pagamentos'] = $this->ultimosPagamentos($result);
+                    $data['pagamentos'] = $this->ultimosPagamentos($result, 1);
                     break;
                 case 'cpf':
                     $this->load->library('validador_cpf');
@@ -23,7 +23,7 @@ class Portaria extends MY_Controller {
                     }
                     $result = $this->pesquisarCPF($search);
                     $data['result'] = $result;
-                    $data['pagamentos'] = $this->ultimosPagamentos($result);
+                    $data['pagamentos'] = $this->ultimosPagamentos($result, 1);
                     break;
                 case 'nome':
                     $result = $this->pesquisarNome($search);
@@ -47,6 +47,7 @@ class Portaria extends MY_Controller {
             $data = [
                 'alertTxt' => null,
                 'alertClass' => null,
+                'tipoPesquisa' => 'nome'
             ];
             switch ($class) {
                 case 'associado':
@@ -54,20 +55,20 @@ class Portaria extends MY_Controller {
                     $this->load->model('dao/associadoDAO');
                     $this->associado->setId($id);
                     $data['result'] = $this->associadoDAO->listarPorId($this->associado);
-                    $data['pagamentos'] = $this->ultimosPagamentos($this->associado);
+                    $data['pagamentos'] = $this->ultimosPagamentos($this->associado, 1);
                     break;
                 case 'dependente':
                     $this->load->model('dependente');
                     $this->load->model('dao/dependenteDAO');
                     $this->dependente->setId($id);
                     $data['result'] = $this->dependenteDAO->listarPorId($this->dependente);
-                    $data['pagamentos'] = $this->ultimosPagamentos($this->dependente);
+                    $data['pagamentos'] = $this->ultimosPagamentos($this->dependente, 1);
                     break;
                 default:
                     throw new Exception('Modalidade inválida.');
                     break;
             }
-            $this->index($data);
+            $this->load->view('portaria', $data);
         } catch (Exception $e) {
             $this->load->view('portaria', [
                 'alertTxt' => $e->getMessage(),
@@ -131,7 +132,7 @@ class Portaria extends MY_Controller {
                     throw new Exception('Não foi possível obter os últimos pagamentos.');
                     break;
             }
-            if (count($lancamentos) <= $max) {
+            if (count($lancamentos) < ($interval - $max)) {
                 return false;
             } else {
                 return true;

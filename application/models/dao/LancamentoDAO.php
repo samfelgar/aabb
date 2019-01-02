@@ -63,10 +63,13 @@ class LancamentoDAO extends DAO {
 
   public function ultimosLancamentos(Associado $associado, $interval = 12) {
     try {
-      $sql = 'select * from lancamentos where data >= date_sub(curdate(), interval ? month) and associados_id = ? '
+      $sql = 'select * from lancamentos where data >= date_sub(?, interval ? month) and associados_id = ? '
       . 'order by data desc';
       $stmt = $this->c->prepare($sql);
+      $date = new DateTime();
+      $date->modify('-1 month');
       $stmt->execute([
+        $date->format('Y-m-d'),
         $interval,
         $associado->getId()
       ]);
@@ -125,6 +128,26 @@ class LancamentoDAO extends DAO {
         $result[] = $lancamento;
       }
       return $result;
+    } catch (Exception $e) {
+      throw $e;
+    }
+  }
+
+  public function check_lancamento(Lancamento $lancamento) {
+    try {
+      $sql = 'select id from lancamentos where month(data) = ? and year(data) = ? and associados_id = ? '
+      . 'order by data desc';
+      $stmt = $this->c->prepare($sql);
+      $stmt->execute([
+        $lancamento->getMonth(),
+        $lancamento->getYear(),
+        $lancamento->getAssociado()->getId()
+      ]);
+      $r = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      if (count($r) < 1) {
+        return false;
+      }
+      return true;
     } catch (Exception $e) {
       throw $e;
     }

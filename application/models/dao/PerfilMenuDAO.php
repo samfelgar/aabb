@@ -61,7 +61,8 @@ class PerfilMenuDAO extends DAO {
         try {
             $sql = 'select menus.* from menus '
                 . 'inner join perfis_menus on menus.id = perfis_menus.menus_id '
-                . 'where perfis_menus.perfis_id = ?';
+                . 'where perfis_menus.perfis_id = ? '
+                . 'order by menus.menus_id, menus.descricao';
             $stmt = $this->c->prepare($sql);
             if (!$stmt->execute([$perfil->getId()])) {
                 throw new PDOException('<strong>[LISTAR PERFIS]</strong> Houve um problema no processamento da sua solitação. ' . $stmt->errorInfo()[2]);

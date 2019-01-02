@@ -127,11 +127,11 @@ class Associado extends CI_Model {
   }
 
   public function setAgencia($agencia) {
-    $this->agencia = $agencia;
+    $this->agencia = preg_replace('/^([0]*\.?[0]*)*([1-9][0-9]*)/', '$2', $agencia);
   }
 
   public function setConta($conta) {
-    $this->conta = $conta;
+    $this->conta = preg_replace('/^([0]*\.?[0]*)*([1-9][0-9]*)/', '$2', $conta);
   }
 
   public function setTipoConta($tipoConta) {

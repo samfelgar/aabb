@@ -16,7 +16,7 @@
           <?php
           $date = new DateTime($lancamento[0]);
           ?>
-          <tr <?= (!$lancamento[1]) ? 'style="background-color:rgb(220, 53, 69); color: white"' : ''; ?>>
+          <tr class="<?= (!$lancamento[1]) ? 'bg-danger text-white' : ''; ?>">
             <td><?= Lancamento::MONTHS[$date->format('m')]; ?></td>
             <td><?= $date->format('Y'); ?></td>
             <td><?= ($lancamento[1]) ? 'Pago' : 'Não pago'; ?></td>
