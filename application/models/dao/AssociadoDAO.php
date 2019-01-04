@@ -368,4 +368,19 @@ class AssociadoDAO extends DAO {
     }
   }
 
+  public function enable(Associado $associado) {
+    try {
+      $sql = 'update associados set status = 1 where id = ?';
+      $stmt = $this->c->prepare($sql);
+      $result = $stmt->execute(array(
+        $associado->getId()
+      ));
+      if (!$result) {
+        throw new Exception('<strong>[HABILITAR ASSOCIADO]</strong> Não foi possível completar a operação. ' . $stmt->errorInfo()[2]);
+      }
+    } catch (Exception $ex) {
+      throw $ex;
+    }
+  }
+
 }

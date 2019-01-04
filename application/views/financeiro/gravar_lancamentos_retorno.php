@@ -1,4 +1,5 @@
 <h3 class="text-primary">Resultado do processamento do arquivo .RET</h3>
+<button type="button" class="btn btn-outline-primary btn-sm print no-print">Imprimir</button>
 <hr>
 <div class="row">
     <div class="col-sm form-group">
@@ -7,7 +8,7 @@
 </div>
 <div class="row">
     <div class="col-sm form-group">
-        <table class="table table-sm table-responsive-sm table-hover dt">
+        <table class="table table-sm table-responsive-lg table-hover">
             <thead>
                 <th>#</th>
                 <th>Nome</th>
@@ -44,7 +45,7 @@
 </div>
 <div class="row">
     <div class="col-sm form-group">
-        <table class="table table-sm table-responsive-sm table-hover dt">
+        <table class="table table-sm table-hover">
             <thead>
                 <th>#</th>
                 <th>Conta</th>
@@ -80,7 +81,7 @@
 </div>
 <div class="row">
     <div class="col-sm form-group">
-        <table class="table table-sm table-responsive-sm table-hover dt">
+        <table class="table table-sm table-hover">
             <thead>
                 <th>#</th>
                 <th>Conta</th>
@@ -116,7 +117,7 @@
 </div>
 <div class="row">
     <div class="col-sm form-group">
-        <table class="table table-sm table-responsive-sm table-hover dt">
+        <table class="table table-sm table-hover">
             <thead>
                 <th>#</th>
                 <th>Conta</th>
@@ -146,13 +147,49 @@
 </div>
 <div class="row">
     <div class="col-sm form-group">
+        <h4 class="text-secondary font-weight-bold">Associados desativados: <?= count($resultados[5]); ?></h4>
+        <p class="text-muted"><small>Os lançamentos abaixo não foram registrados pelo sistema, pois o associado está desativado.</small></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm form-group">
+        <table class="table table-sm table-hover">
+            <thead>
+                <th>#</th>
+                <th>Conta</th>
+                <th>Agência</th>
+                <th>Data</th>
+                <th>Valor</th>
+                <th>Mensagem de retorno</th>
+            </thead>
+            <tbody>
+                <?php if (count($resultados[5]) > 0) : ?>
+                    <?php $i = 1; ?>
+                    <?php foreach ($resultados[5] as $registro): ?>
+                        <tr>
+                            <td><?= $i; ?></td>
+                            <td><?= $registro->getF04(); ?></td>
+                            <td><?= $registro->getF03(); ?></td>
+                            <td><?= (new DateTime($registro->getF05()))->format('d/m/Y'); ?></td>
+                            <td>R$ <?= $registro->getF06(true); ?></td>
+                            <td><?= RegistroF::CODIGO_RETORNO[$registro->getF07()]; ?></td>
+                        </tr>
+                        <?php $i++; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm form-group">
         <h4 class="text-secondary font-weight-bold">Lançamentos duplicados: <?= count($resultados[4]); ?></h4>
         <p class="text-muted"><small>Os lançamentos abaixo já foram cadastrados anteriormente. Nenhuma alteração foi feita.</small></p>
     </div>
 </div>
 <div class="row">
     <div class="col-sm form-group">
-        <table class="table table-sm table-responsive-sm table-hover dt">
+        <table class="table table-sm table-hover">
             <thead>
                 <th>#</th>
                 <th>Conta</th>

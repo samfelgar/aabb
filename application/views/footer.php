@@ -1,4 +1,5 @@
 </div>
+<button type="button" class="btn btn-primary top-btn no-print" title="Voltar para o topo"><i class="material-icons">keyboard_arrow_up</i></button>
 <script>
 var base_url = '<?= base_url(); ?>';
 </script>

@@ -185,6 +185,7 @@ class Financeiro extends MY_Controller {
             $this->load->model('dao/lancamentoDAO');
             $this->load->library('validador_digito');
             $not_found = [];
+            $disabled = [];
             $not_paid = [];
             $incorrect_value = [];
             $duplicated = [];
@@ -203,6 +204,10 @@ class Financeiro extends MY_Controller {
                     $not_found[] = $registro;
                     continue;
                 }
+                if (! $this->associado->getStatus()) {
+                    $disabled[] = $registro;
+                    continue;
+                }
                 if ($associado->getPlano()->getValor() != $registro->getF06()) {
                     $incorrect_value[] = $registro;
                     continue;
@@ -218,7 +223,7 @@ class Financeiro extends MY_Controller {
                 $this->lancamentoDAO->inserir($lancamento);
                 $success[] = $lancamento;
             }
-            return [$success, $not_paid, $incorrect_value, $not_found, $duplicated];
+            return [$success, $not_paid, $incorrect_value, $not_found, $duplicated, $disabled];
         } catch (Exception $e) {
             throw $e;
         }

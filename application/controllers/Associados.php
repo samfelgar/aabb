@@ -136,6 +136,30 @@ class Associados extends MY_Controller {
         }
     }
 
+    public function reativar($id) {
+        try {
+            $this->load->model('associado');
+            $this->load->model('dao/associadoDAO');
+            $this->associado->setId($id);
+            $this->associadoDAO->enable($this->associado);
+            redirect('/associados');
+        } catch (Exception $e) {
+            $this->error($e);
+        }
+    }
+
+    public function desativados() {
+        try {
+            $this->load->model('dao/associadoDAO');
+            $this->load->template('associados_desativados', [
+                'active' => 'associados',
+                'associados' => $this->associadoDAO->listar(0)
+            ]);
+        } catch (Exception $e) {
+            $this->error($e);
+        }
+    }
+
     private function verificar_cpf($cpf, $qtd = 0) {
         try {
             $this->load->library('validador_cpf');

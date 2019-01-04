@@ -22,7 +22,11 @@
 <div class="d-flex align-items-center">
     <h3 class="text-primary mr-auto">Alterar associado</h3>
     <div>
-        <button type="button" id="desativar-associado" class="btn btn-outline-danger btn-sm">Desativar associado</button>
+        <?php if ($associado->getStatus()): ?>
+            <button type="button" id="desativar-associado" class="btn btn-outline-danger btn-sm">Desativar associado</button>
+        <?php else: ?>
+            <a href="<?= base_url('associados/reativar/' . $associado->getId()); ?>" class="btn btn-outline-primary btn-sm">Reativar associado</a>
+        <?php endif; ?>
     </div>
 </div>
 <hr>

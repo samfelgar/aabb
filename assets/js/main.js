@@ -21,26 +21,8 @@ var table = $('.dt').DataTable({
             "sSortAscending": ": Ordenar colunas de forma ascendente",
             "sSortDescending": ": Ordenar colunas de forma descendente"
         }
-    },
-    buttons: [{
-        extend: 'excel',
-        text: 'Planilha',
-        className: 'btn btn-outline-success btn-sm'
-    }]
+    }
 });
-table.button().add(1, {
-    extend: 'print',
-    text: 'Imprimir',
-    className: 'btn btn-outline-primary btn-sm',
-    message: 'Total de associados: ' + table.rows().data().length
-});
-table.button().add(1, {
-    extend: 'pdf',
-    className: 'btn btn-outline-danger btn-sm',
-    orientation: 'landscape',
-    messageTop: 'Total de associados: ' + table.rows().data().length
-});
-table.buttons().container().appendTo($('.export-btn'));
 
 function applyMask() {
     $('.cpf').mask('000.000.000-00');
@@ -607,4 +589,20 @@ $('select[name="ano"]').change(function() {
 // Script da página do leitor do arquivo de retorno
 $('#warning-modal').modal({
     'backdrop': 'static'
+});
+
+$(window).scroll(function() {
+    var height = $(window).scrollTop();
+    if (height > 100) {
+        $('.top-btn').fadeIn();
+    } else {
+        $('.top-btn').fadeOut();
+    }
+});
+$(document).ready(function() {
+    $(".top-btn").click(function(event) {
+        event.preventDefault();
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+    });
 });
