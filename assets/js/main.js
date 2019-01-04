@@ -421,6 +421,30 @@ $('#desativar-associado').click(function() {
 });
 
 /*
+ * Excluir associado
+ */
+$('#excluir-associado').click(function() {
+    var title = $('.modal-title');
+    var body = $('.add-body');
+    var footer = $('.modal-footer');
+    var a = $('<a class="btn btn-danger">');
+    var close = $('<button data-dismiss="modal" class="btn btn-secondary">');
+    body.addClass('text-center');
+    close.text('Fechar');
+    a.attr('href', base_url + 'associados/excluir/' + $('#associado-id').val());
+    a.text('Continuar');
+    title.html('Excluir associado');
+    body.html('Essa operação não poderá ser desfeita. Tem certeza que deseja continuar?');
+    footer.css('display', 'flex');
+    footer.html(close);
+    footer.append(a);
+    $('.modal').modal();
+    $('.modal').on('hidden.bs.modal', function() {
+        footer.html(close);
+    });
+});
+
+/*
  * Função responsável por ativar a câmera e tirar as fotos
  */
 

@@ -26,6 +26,7 @@
             <button type="button" id="desativar-associado" class="btn btn-outline-danger btn-sm">Desativar associado</button>
         <?php else: ?>
             <a href="<?= base_url('associados/reativar/' . $associado->getId()); ?>" class="btn btn-outline-primary btn-sm">Reativar associado</a>
+            <button type="button" id="excluir-associado" class="btn btn-outline-danger btn-sm">Excluir</button>
         <?php endif; ?>
     </div>
 </div>

@@ -4,6 +4,14 @@
     <a href="<?= base_url('associados/pesquisar_associado'); ?>" class="btn btn-outline-primary btn-sm">Adicionar associado</a>
     <!-- <div class="export-btn ml-auto"></div> -->
 </div>
+<?php if ($delete): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Associado excluído com sucesso.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
 <table class="table table-sm table-hover table-responsive-sm dt">
     <thead>
         <tr>

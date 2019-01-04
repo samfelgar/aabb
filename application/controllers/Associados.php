@@ -8,6 +8,7 @@ class Associados extends MY_Controller {
             $data = [
                 'active' => 'associados',
                 'associados' => $this->ad->listar(),
+                'delete' => $this->input->get('delete')
             ];
             $this->load->template('associados', $data);
         } catch (Exception $ex) {
@@ -142,7 +143,19 @@ class Associados extends MY_Controller {
             $this->load->model('dao/associadoDAO');
             $this->associado->setId($id);
             $this->associadoDAO->enable($this->associado);
-            redirect('/associados');
+            redirect('/associados/editar/' . $this->associado->getId());
+        } catch (Exception $e) {
+            $this->error($e);
+        }
+    }
+
+    public function excluir($id) {
+        try {
+            $this->load->model('associado');
+            $this->load->model('dao/associadoDAO');
+            $this->associado->setId($id);
+            $this->associadoDAO->delete($this->associado);
+            redirect('/associados/?delete=true');
         } catch (Exception $e) {
             $this->error($e);
         }
@@ -169,7 +182,11 @@ class Associados extends MY_Controller {
             $this->load->model('dao/associadoDAO');
             $qtdCPF = $this->associadoDAO->pesquisarCPF($cpf);
             if ($qtdCPF > $qtd) {
-                throw new Exception('Já existe um associado cadastrado com o CPF informado (' . $cpf . ').');
+                $this->load->model('associado');
+                $this->associado->setCpf($cpf);
+                $this->associadoDAO->listarPorCpf($this->associado);
+                throw new Exception('Já existe um associado cadastrado com o CPF informado 
+                    (<a href="'. base_url('associados/ver/' . $this->associado->getId()) .'">' . $this->associado->getCpf() . '</a>).');
             }
         } catch (Exception $e) {
             throw $e;
