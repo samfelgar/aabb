@@ -2,15 +2,17 @@
 
 class Acessos extends MY_Controller {
 
+    private $active = 'sistema';
+
     public function index() {
         try {
             $this->load->model('dao/perfilDAO');
             $this->load->template('selecionar_perfil', [
-                'active' => 'sistema',
+                'active' => $this->active,
                 'perfis' => $this->perfilDAO->listar()
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -21,13 +23,13 @@ class Acessos extends MY_Controller {
             $this->load->model('dao/perfilMenuDAO', 'pmd');
             $this->perfil->setId($this->input->get('perfil'));
             $this->load->template('visualizar_acessos', [
-                'active' => 'sistema',
+                'active' => $this->active,
                 'perfil' => $this->perfilDAO->listarPorId($this->perfil),
                 'menusAtivos' => $this->pmd->listarMenusPorPerfil($this->perfil),
                 'menusInativos' => $this->pmd->listarMenusSemAcesso($this->perfil)
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -47,7 +49,7 @@ class Acessos extends MY_Controller {
             }
             redirect('acessos/visualizar/?perfil=' . $this->perfil->getId());
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -67,15 +69,8 @@ class Acessos extends MY_Controller {
             }
             redirect('acessos/visualizar/?perfil=' . $this->perfil->getId());
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'sistema',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }

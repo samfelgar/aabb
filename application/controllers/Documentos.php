@@ -2,6 +2,8 @@
 
 class Documentos extends MY_Controller {
 
+    private $active = 'associados';
+
     public function novo() {
         try {
             $controller = $this->input->get('from');
@@ -11,13 +13,13 @@ class Documentos extends MY_Controller {
             }
             $this->load->model('dao/tipoDocumentoDAO', 'tdd');
             $data = [
-                'active' => $this->input->get('from'),
+                'active' => $this->active,
                 'action' => base_url('documentos/salvar/?from=' . $controller . '&id=' . $id),
                 'tipoDocumento' => $this->tdd->listar()
             ];
             $this->load->template('upload_documento', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -98,7 +100,7 @@ class Documentos extends MY_Controller {
                 throw new Exception('Não foi possível salvar o arquivo.');
             }
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -132,7 +134,7 @@ class Documentos extends MY_Controller {
                     throw new Exception('Acesso indevido!');
             }
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -151,15 +153,8 @@ class Documentos extends MY_Controller {
                 'edit' => $edit
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'associados',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }

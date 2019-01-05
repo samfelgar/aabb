@@ -2,6 +2,8 @@
 
 class Fotos extends MY_Controller {
 
+    private $active = 'associados';
+
     public function nova($id, $tipo = 'associado', $acao = 'nova') {
         try {
             $dados = null;
@@ -17,13 +19,13 @@ class Fotos extends MY_Controller {
                 $dados = $this->dd->listarPorId($this->dependente);
             }
             $this->load->template('nova_foto', array(
-                'active' => 'associados',
+                'active' => $this->active,
                 'usuario' => $dados,
                 'tipo' => $tipo,
                 'acao' => $acao,
             ));
-        } catch (Exception $ex) {
-            $this->error($ex);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
         }
     }
 
@@ -89,21 +91,14 @@ class Fotos extends MY_Controller {
                 throw new Exception('É necessário informar o tipo de usuário.');
                 break;
             }
-        } catch (Exception $ex) {
+        } catch (Exception $e) {
             $response = array(
                 'status' => false,
-                'error' => $ex->getMessage(),
+                'error' => $e->getMessage(),
             );
             header("Content-Type: application/json; charset=UTF-8");
             print json_encode($response);
         }
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'associados',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }

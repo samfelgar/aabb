@@ -18,4 +18,12 @@ class MY_Controller extends CI_Controller {
         }
     }
 
+    protected function error(Exception $e, $active = 'home') {
+        $data = [
+            'active' => $active,
+            'error' => $e->getMessage(),
+        ];
+        $this->load->template('error', $data);
+    }
+
 }

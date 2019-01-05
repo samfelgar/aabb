@@ -2,6 +2,8 @@
 
 class Enderecos extends MY_Controller {
 
+    private $active = 'associados';
+
     public function novo() {
         $this->load->view('novo_endereco');
     }
@@ -16,7 +18,7 @@ class Enderecos extends MY_Controller {
             ];
             $this->load->view('editar_endereco', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -28,7 +30,7 @@ class Enderecos extends MY_Controller {
             $data = ['enderecos' => $this->ed->listar($this->associado)];
             $this->load->view('enderecos_por_associado', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -78,11 +80,4 @@ class Enderecos extends MY_Controller {
         }
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'associados',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }

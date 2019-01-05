@@ -49,7 +49,7 @@
 <h3 class="text-primary">
     <?= $associado->getNome(); ?>
 </h3>
-<button type="button" class="btn btn-sm btn-outline-primary print no-print" name="imprimir">Imprimir</button>
+<a href="<?= base_url('associados/imprimir/' . $associado->getId()); ?>" class="btn btn-sm btn-outline-primary" target="_blank">Imprimir</a>
 <hr>
 <form>
     <div class="form-row">

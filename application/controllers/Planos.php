@@ -2,21 +2,23 @@
 
 class Planos extends MY_Controller {
 
+    private $active = 'financeiro';
+
     public function index() {
         try {
             $this->load->model('dao/planoDAO', 'pd');
             $this->load->template('planos', array(
-                'active' => 'planos',
+                'active' => $this->active,
                 'planos' => $this->pd->listar()
             ));
-        } catch (Exception $ex) {
-            $this->error($ex);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
         }
     }
 
     public function novo() {
         $this->load->template('novo_plano', [
-            'active' => 'planos'
+            'active' => $this->active
         ]);
     }
 
@@ -26,11 +28,11 @@ class Planos extends MY_Controller {
             $this->load->model('dao/planoDAO');
             $this->plano->setId($id);
             $this->load->template('alterar_plano', [
-                'active' => 'planos',
+                'active' => $this->active,
                 'plano' => $this->planoDAO->listarPorId($this->plano)
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -49,7 +51,7 @@ class Planos extends MY_Controller {
                 redirect('planos');
             }
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -61,16 +63,8 @@ class Planos extends MY_Controller {
             $this->planoDAO->delete($this->plano);
             redirect('planos');
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
-    }
-
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'planos',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
     }
 
 }

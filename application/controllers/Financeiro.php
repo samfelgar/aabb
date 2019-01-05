@@ -2,13 +2,19 @@
 
 class Financeiro extends MY_Controller {
 
+    private $active = 'financeiro';
+
     public function index() {
-        $this->load->model('dao/associadoDAO', 'ad');
-        $data = [
-            'active' => 'financeiro',
-            'associados' => $this->ad->listar(),
-        ];
-        $this->load->template('financeiro/pesquisa_associado', $data);
+        try {
+            $this->load->model('dao/associadoDAO', 'ad');
+            $data = [
+                'active' => $this->active,
+                'associados' => $this->ad->listar(),
+            ];
+            $this->load->template('financeiro/pesquisa_associado', $data);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
+        }
     }
 
     public function overview($id) {
@@ -19,20 +25,20 @@ class Financeiro extends MY_Controller {
             $this->load->model('dao/lancamentoDAO', 'ld');
             $this->associado->setId($id);
             $data = [
-                'active' => 'financeiro',
+                'active' => $this->active,
                 'associado' => $this->ad->listarPorId($this->associado),
                 'lancamentos' => $this->checkPayment($this->ld->ultimosLancamentos($this->associado)),
             ];
             $this->load->template('financeiro/visao_geral', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
     public function inadimplentes() {
         $date = new DateTime();
         $data = [
-            'active' => 'financeiro',
+            'active' => $this->active,
             'year' => $date->format('Y'),
         ];
         $this->load->model('lancamento');
@@ -51,14 +57,14 @@ class Financeiro extends MY_Controller {
                 $inad[] = $this->ad->listarMenos($ids[$j]);
             }
             $data = [
-                'active' => 'financeiro',
+                'active' => $this->active,
                 'associados' => $inad,
                 'year' => $year,
                 'month' => $month,
             ];
             $this->load->template('financeiro/inadimplentes', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -83,7 +89,7 @@ class Financeiro extends MY_Controller {
             }
             redirect('financeiro/overview/' . $this->associado->getId());
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -107,7 +113,7 @@ class Financeiro extends MY_Controller {
 
     public function upload_retorno() {
         $this->load->template('financeiro/upload_retorno', [
-            'active' => 'Financeiro'
+            'active' => $this->active
         ]);
     }
 
@@ -133,11 +139,11 @@ class Financeiro extends MY_Controller {
             $this->load->model('dbt_automatico/reader');
             $registros = $this->reader->ler($tmp_name);
             $this->load->template('financeiro/ler_retorno', [
-                'active' => 'Financeiro',
+                'active' => $this->active,
                 'registros' => $registros
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -169,11 +175,11 @@ class Financeiro extends MY_Controller {
             }
             $result = $this->gerar_lancamentos_dbt($registros);
             $this->load->template('financeiro/gravar_lancamentos_retorno', [
-                'active' => 'Financeiro',
+                'active' => $this->active,
                 'resultados' => $result
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -255,11 +261,4 @@ class Financeiro extends MY_Controller {
         return $array;
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'financeiro',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }

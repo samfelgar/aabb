@@ -2,16 +2,18 @@
 
 class Menus extends MY_Controller {
 
+    private $active = 'sistema';
+
     public function index() {
         try {
             $this->load->model('menu');
             $this->load->model('dao/menuDAO');
             $this->load->template('menus', [
-                'active' => 'sistema',
+                'active' => $this->active,
                 'links' => $this->menuDAO->listar()
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -19,11 +21,11 @@ class Menus extends MY_Controller {
         try {
             $this->load->model('dao/menuDAO');
             $this->load->template('novo_menu', [
-                'active' => 'sistema',
+                'active' => $this->active,
                 'menusPai' => $this->menuDAO->listarMenusPai()
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -33,12 +35,12 @@ class Menus extends MY_Controller {
             $this->load->model('menu');
             $this->menu->setId($id);
             $this->load->template('alterar_menu', [
-                'active' => 'sistema',
+                'active' => $this->active,
                 'menusPai' => $this->menuDAO->listarMenusPai(),
                 'link' => $this->menuDAO->listarPorId($this->menu)
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -62,7 +64,7 @@ class Menus extends MY_Controller {
             }
             redirect('menus');
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -74,15 +76,8 @@ class Menus extends MY_Controller {
             $this->menuDAO->delete($this->menu);
             redirect('menus');
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'sistema',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }

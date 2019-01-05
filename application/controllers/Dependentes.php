@@ -2,6 +2,8 @@
 
 class Dependentes extends MY_Controller {
 
+    private $active = 'associados';
+
     public function novo() {
         try {
             $id = $this->input->get('id');
@@ -12,11 +14,11 @@ class Dependentes extends MY_Controller {
             $this->load->model('dao/associadoDAO', 'ad');
             $this->associado->setId($id);
             $this->load->template('novo_dependente', [
-                'active' => 'associados',
+                'active' => $this->active,
                 'associado' => $this->ad->listarMenos($this->associado)
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -26,12 +28,12 @@ class Dependentes extends MY_Controller {
             $this->load->model('dao/dependenteDAO', 'dd');
             $this->dependente->setId($id);
             $data = [
-                'active' => 'associados',
+                'active' => $this->active,
                 'dependente' => $this->dd->listarPorId($this->dependente)
             ];
             $this->load->template('editar_dependente', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -45,7 +47,7 @@ class Dependentes extends MY_Controller {
             ];
             $this->load->view('dependentes_por_associado', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -73,7 +75,7 @@ class Dependentes extends MY_Controller {
             }
             redirect('associados/editar/' . $associadoID . '/#dependentes');
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -89,7 +91,7 @@ class Dependentes extends MY_Controller {
             $this->dd->delete($this->dependente);
             redirect('associados/editar/' . $associadoID . '/#dependentes');
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -131,11 +133,4 @@ class Dependentes extends MY_Controller {
         }
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'associados',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }

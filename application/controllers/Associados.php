@@ -2,23 +2,51 @@
 
 class Associados extends MY_Controller {
 
+    private $active = 'associados';
+
     public function index() {
         try {
             $this->load->model('dao/associadoDAO', 'ad');
             $data = [
-                'active' => 'associados',
+                'active' => $this->active,
                 'associados' => $this->ad->listar(),
                 'delete' => $this->input->get('delete')
             ];
             $this->load->template('associados', $data);
-        } catch (Exception $ex) {
-            $this->error($ex);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
+        }
+    }
+
+    public function imprimir($id) {
+        try {
+            $this->load->model('associado');
+            $this->load->model('dao/associadoDAO');
+            $this->load->model('dao/telefoneDAO');
+            $this->load->model('dao/enderecoDAO');
+            $this->load->model('dao/planoDAO');
+            $this->load->model('dao/dependenteDAO');
+            $this->load->model('termo_adesao');
+            $this->load->config('app_config');
+            $this->associado->setId($id);
+            $data = [
+                'active' => $this->active,
+                'associado' => $this->associadoDAO->listarPorId($this->associado),
+                'telefones' => $this->telefoneDAO->listar($this->associado),
+                'enderecos' => $this->enderecoDAO->listar($this->associado),
+                'dependentes' => $this->dependenteDAO->listar($this->associado),
+                'termo' => $this->termo_adesao->get_terms(),
+                'cidade' => $this->config->item('app_city')
+            ];
+            $this->load->view('impressao_ficha_associado', $data);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
         }
     }
 
     public function pesquisar_associado() {
         $this->load->template('pesquisar_cpf', [
-            'active' => 'associados'
+            'active' => $this->active
         ]);
     }
 
@@ -31,13 +59,13 @@ class Associados extends MY_Controller {
             }
             $this->verificar_cpf($cpf);
             $data = [
-                'active' => 'associados',
+                'active' => $this->active,
                 'planos' => $this->pd->listar(),
                 'cpf' => $cpf
             ];
             $this->load->template('novo_associado', $data);
-        } catch (Exception $ex) {
-            $this->error($ex);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
         }
     }
 
@@ -52,7 +80,7 @@ class Associados extends MY_Controller {
             $this->load->model('dao/dependenteDAO', 'dd');
             $this->load->model('dao/associadoDocumentoDAO', 'add');
             $data = [
-                'active' => 'associados',
+                'active' => $this->active,
                 'associado' => $this->ad->listarPorId($this->associado),
                 'telefones' => $this->td->listar($this->associado),
                 'enderecos' => $this->ed->listar($this->associado),
@@ -61,8 +89,8 @@ class Associados extends MY_Controller {
                 'documentos' => $this->add->listar($this->associado)
             ];
             $this->load->template('ver_associado', $data);
-        } catch (Exception $ex) {
-            $this->error($ex);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
         }
     }
 
@@ -75,15 +103,15 @@ class Associados extends MY_Controller {
             $this->load->model('dao/dependenteDAO', 'dd');
             $this->load->model('dao/associadoDocumentoDAO', 'add');
             $data = [
-                'active' => 'associados',
+                'active' => $this->active,
                 'associado' => $this->ad->listarPorId($this->associado),
                 'planos' => $this->pd->listar(),
                 'dependentes' => $this->dd->listar($this->associado),
                 'documentos' => $this->add->listar($this->associado)
             ];
             $this->load->template('editar_associado', $data);
-        } catch (Exception $ex) {
-            $this->error($ex);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
         }
     }
 
@@ -120,8 +148,8 @@ class Associados extends MY_Controller {
                 }
                 redirect('/fotos/nova/' . $lastId);
             }
-        } catch (Exception $ex) {
-            $this->error($ex);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
         }
     }
 
@@ -133,7 +161,7 @@ class Associados extends MY_Controller {
             $this->ad->disable($this->associado);
             redirect('/associados');
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -145,7 +173,7 @@ class Associados extends MY_Controller {
             $this->associadoDAO->enable($this->associado);
             redirect('/associados/editar/' . $this->associado->getId());
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -157,7 +185,7 @@ class Associados extends MY_Controller {
             $this->associadoDAO->delete($this->associado);
             redirect('/associados/?delete=true');
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -165,11 +193,11 @@ class Associados extends MY_Controller {
         try {
             $this->load->model('dao/associadoDAO');
             $this->load->template('associados_desativados', [
-                'active' => 'associados',
+                'active' => $this->active,
                 'associados' => $this->associadoDAO->listar(0)
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -191,14 +219,6 @@ class Associados extends MY_Controller {
         } catch (Exception $e) {
             throw $e;
         }
-    }
-
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'associados',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
     }
 
 }

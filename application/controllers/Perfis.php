@@ -2,32 +2,38 @@
 
 class Perfis extends MY_Controller {
 
+    private $active = 'sistema';
+
     public function index() {
         try {
             $this->load->model('dao/perfilDAO');
             $this->load->template('perfis', [
-                'active' => 'sistema',
+                'active' => $this->active,
                 'perfis' => $this->perfilDAO->listar()
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
     public function novo() {
         $this->load->template('novo_perfil', [
-            'active' => 'sistema'
+            'active' => $this->active
         ]);
     }
 
     public function alterar($id) {
-        $this->load->model('perfil');
-        $this->load->model('dao/perfilDAO');
-        $this->perfil->setId($id);
-        $this->load->template('alterar_perfil', [
-            'active' => 'sistema',
-            'perfil' => $this->perfilDAO->listarPorId($this->perfil)
-        ]);
+        try {
+            $this->load->model('perfil');
+            $this->load->model('dao/perfilDAO');
+            $this->perfil->setId($id);
+            $this->load->template('alterar_perfil', [
+                'active' => $this->active,
+                'perfil' => $this->perfilDAO->listarPorId($this->perfil)
+            ]);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
+        }
     }
 
     public function salvar($id = null) {
@@ -43,7 +49,7 @@ class Perfis extends MY_Controller {
             }
             redirect('perfis');
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -55,15 +61,8 @@ class Perfis extends MY_Controller {
             $this->perfilDAO->delete($this->perfil);
             redirect('perfis');
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'sistema',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }

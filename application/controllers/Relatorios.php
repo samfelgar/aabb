@@ -2,6 +2,8 @@
 
 class Relatorios extends MY_Controller {
 
+    private $active = 'associados';
+
     public function relacaoAssociados() {
         try {
             $this->load->model('associado');
@@ -18,21 +20,14 @@ class Relatorios extends MY_Controller {
                 $result[] = [$associado, $dependentes];
             }
             $this->load->template('relatorios/relacao_associados', [
-                'active' => 'relatorios',
+                'active' => 'associados',
                 'relacao' => $result,
                 'totalAssociados' => $totalAssociados,
                 'totalDependentes' => $totalDependentes
             ]);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'relatorios',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }

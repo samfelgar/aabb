@@ -2,6 +2,8 @@
 
 class Telefones extends MY_Controller {
 
+    private $active = 'associados';
+
     public function novo() {
         $this->load->view('novo_telefone');
     }
@@ -16,7 +18,7 @@ class Telefones extends MY_Controller {
             ];
             $this->load->view('editar_telefone', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -28,7 +30,7 @@ class Telefones extends MY_Controller {
             $data = ['telefones' => $this->td->listar($this->associado)];
             $this->load->view('telefones_por_associado', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -40,7 +42,7 @@ class Telefones extends MY_Controller {
             $data = ['telefone' => $this->td->listarPorId($this->telefone)];
             $this->load->view('editar_telefone', $data);
         } catch (Exception $e) {
-            $this->error($e);
+            $this->error($e, $this->active);
         }
     }
 
@@ -83,16 +85,6 @@ class Telefones extends MY_Controller {
                 'error' => $e->getMessage(),
             ]);
         }
-    }
-
-    private function error(Exception $ex) {
-        $this->load->view('header', array(
-            'active' => 'associados',
-        ));
-        $this->load->view('error', array(
-            'error' => $ex->getMessage(),
-        ));
-        $this->load->view('footer');
     }
 
 }

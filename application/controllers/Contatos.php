@@ -2,18 +2,20 @@
 
 class Contatos extends MY_Controller {
 
+    private $active = 'associados';
+
     public function novo($associadoId) {
         try {
             $this->load->model('associado');
             $this->load->model('dao/associadoDAO', 'ad');
             $this->associado->setId($associadoId);
             $data = [
-                'active' => 'associados',
+                'active' => $this->active,
                 'associado' => $this->ad->listarPorId($this->associado),
             ];
             $this->load->template('novo_telefone_endereco', $data);
-        } catch (Exception $ex) {
-            $this->error($ex);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
         }
     }
 
@@ -41,16 +43,9 @@ class Contatos extends MY_Controller {
             $this->endereco->setCep($this->input->post('cep'));
             $this->ed->inserir($this->endereco);
             redirect('/associados/editar/' . $this->associado->getId());
-        } catch (Exception $ex) {
-            $this->error($ex);
+        } catch (Exception $e) {
+            $this->error($e, $this->active);
         }
     }
 
-    private function error(Exception $ex) {
-        $data = [
-            'active' => 'associados',
-            'error' => $ex->getMessage(),
-        ];
-        $this->load->template('error', $data);
-    }
 }
