@@ -14,6 +14,7 @@
 
 <body>
     <div class="container mb-5 pt-3">
+        <h2 class="text-center mb-4">Associação Atlética Banco do Brasil - AABB</h2>
         <h3><?= $associado->getNome(); ?></h3>
         <hr>
         <form>
