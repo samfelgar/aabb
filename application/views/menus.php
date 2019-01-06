@@ -2,14 +2,14 @@
 <a href="<?= base_url('menus/novo'); ?>" class="btn btn-sm btn-outline-primary mb-3">Adicionar novo</a>
 <table class="table table-sm table-hover dt">
     <thead>
-        <th>id</th>
-        <th>Descrição</th>
-        <th>URL</th>
-        <th>Menu pai</th>
-        <th>Opções</th>
-    </thead>
-    <tbody>
-        <?php foreach ($links as $link): ?>
+    <th>id</th>
+    <th>Descrição</th>
+    <th>URL</th>
+    <th>Menu pai</th>
+    <th>Opções</th>
+</thead>
+<tbody>
+    <?php foreach ($links as $link): ?>
         <tr>
             <td>
                 <?= $link->getId(); ?>
@@ -32,6 +32,6 @@
                 </a>
             </td>
         </tr>
-        <?php endforeach; ?>
-    </tbody>
+    <?php endforeach; ?>
+</tbody>
 </table>

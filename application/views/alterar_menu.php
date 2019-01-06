@@ -16,9 +16,9 @@
             <select name="menu-pai" id="menu-pai" class="custom-select">
                 <option value="">Nenhum</option>
                 <?php foreach ($menusPai as $mp): ?>
-                <option value="<?= $mp->getId(); ?>" <?= ($mp->getId() == $link->getMenu()->getId()) ? 'selected' : ''; ?>>
-                    <?= $mp->getDescricao(); ?>
-                </option>
+                    <option value="<?= $mp->getId(); ?>" <?= ($mp->getId() == $link->getMenu()->getId()) ? 'selected' : ''; ?>>
+                        <?= $mp->getDescricao(); ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
         </div>

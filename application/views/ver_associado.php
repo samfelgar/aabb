@@ -55,9 +55,9 @@
     <div class="form-row">
         <div class="col-sm-4 overlay text-center form-group">
             <?php if (empty($associado->getPhoto())): ?>
-            <img src="<?= base_url('assets/images/user.png'); ?>" class="rounded overlay-empty-image" alt="Sem foto">
+                <img src="<?= base_url('assets/images/user.png'); ?>" class="rounded overlay-empty-image" alt="Sem foto">
             <?php else: ?>
-            <img src="<?= $associado->getPhoto(true); ?>" class="rounded img-fluid overlay-image" alt="">
+                <img src="<?= $associado->getPhoto(true); ?>" class="rounded img-fluid overlay-image" alt="">
             <?php endif; ?>
             <div class="overlay-content">
                 <a class="btn btn-primary" href="<?= base_url('fotos/alterar/associado/' . $associado->getId()); ?>">
@@ -80,11 +80,11 @@
                 <div class="col-sm form-group">
                     <label for="estado-civil">Estado civil</label>
                     <select name="estado-civil" id="estado-civil" class="form-control" disabled="">
-                        <option value="solteiro" <?=($associado->getEstadoCivil() == 'solteiro') ? 'selected' : ''; ?>>Solteiro(a)</option>
-                        <option value="casado" <?=($associado->getEstadoCivil() == 'casado') ? 'selected' : ''; ?>>Casado(a)</option>
-                        <option value="divorciado" <?=($associado->getEstadoCivil() == 'divorciado') ? 'selected' : ''; ?>>Divorciado(a)</option>
-                        <option value="viuvo" <?=($associado->getEstadoCivil() == 'viuvo') ? 'selected' : ''; ?>>Viúvo(a)</option>
-                        <option value="separado" <?=($associado->getEstadoCivil() == 'separado') ? 'selected' : ''; ?>>Separado(a)</option>
+                        <option value="solteiro" <?= ($associado->getEstadoCivil() == 'solteiro') ? 'selected' : ''; ?>>Solteiro(a)</option>
+                        <option value="casado" <?= ($associado->getEstadoCivil() == 'casado') ? 'selected' : ''; ?>>Casado(a)</option>
+                        <option value="divorciado" <?= ($associado->getEstadoCivil() == 'divorciado') ? 'selected' : ''; ?>>Divorciado(a)</option>
+                        <option value="viuvo" <?= ($associado->getEstadoCivil() == 'viuvo') ? 'selected' : ''; ?>>Viúvo(a)</option>
+                        <option value="separado" <?= ($associado->getEstadoCivil() == 'separado') ? 'selected' : ''; ?>>Separado(a)</option>
                     </select>
                 </div>
                 <div class="col-sm form-group">
@@ -109,9 +109,9 @@
             <label for="plano">Plano</label>
             <select name="plano" id="plano" class="form-control" disabled="">
                 <?php foreach ($planos as $plano): ?>
-                <option value="<?= $plano->getId(); ?>" <?=($associado->getPlano()->getId() == $plano->getId()) ? 'selected' : ''; ?>>
-                    <?= $plano->getDescricao(); ?>
-                </option>
+                    <option value="<?= $plano->getId(); ?>" <?= ($associado->getPlano()->getId() == $plano->getId()) ? 'selected' : ''; ?>>
+                        <?= $plano->getDescricao(); ?>
+                    </option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -126,16 +126,16 @@
         <div class="col-sm form-group">
             <label for="tipo-conta">Tipo de conta</label>
             <select name="tipo-conta" id="tipo-conta" class="form-control" disabled="">
-                <option value="corrente" <?=($associado->getTipoConta() == 'corrente') ? 'selected' : ''; ?>>Corrente</option>
-                <option value="poupanca" <?=($associado->getTipoConta() == 'poupanca') ? 'selected' : ''; ?>>Poupança</option>
+                <option value="corrente" <?= ($associado->getTipoConta() == 'corrente') ? 'selected' : ''; ?>>Corrente</option>
+                <option value="poupanca" <?= ($associado->getTipoConta() == 'poupanca') ? 'selected' : ''; ?>>Poupança</option>
             </select>
         </div>
         <div class="col-sm form-group">
             <label for="forma-pagamento">Forma de pagamento</label>
             <select name="forma-pagamento" id="forma-pagamento" class="form-control" disabled="">
-                <option value="conta" <?=($associado->getFormaPagamento() == 'conta') ? 'selected' : ''; ?>>Débito em conta</option>
-                <option value="boleto" <?=($associado->getFormaPagamento() == 'boleto') ? 'selected' : ''; ?>>Boleto</option>
-                <option value="cartao" <?=($associado->getFormaPagamento() == 'cartao') ? 'selected' : ''; ?>>Cartão de crédito</option>
+                <option value="conta" <?= ($associado->getFormaPagamento() == 'conta') ? 'selected' : ''; ?>>Débito em conta</option>
+                <option value="boleto" <?= ($associado->getFormaPagamento() == 'boleto') ? 'selected' : ''; ?>>Boleto</option>
+                <option value="cartao" <?= ($associado->getFormaPagamento() == 'cartao') ? 'selected' : ''; ?>>Cartão de crédito</option>
             </select>
         </div>
     </div>
@@ -151,14 +151,14 @@
                 </thead>
                 <tbody>
                     <?php foreach ($telefones as $telefone): ?>
-                    <tr>
-                        <td>
-                            <?= $telefone->getDdd(); ?>
-                        </td>
-                        <td>
-                            <?= $telefone->getTelefone(); ?>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <?= $telefone->getDdd(); ?>
+                            </td>
+                            <td>
+                                <?= $telefone->getTelefone(); ?>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -177,23 +177,23 @@
                 </thead>
                 <tbody>
                     <?php foreach ($enderecos as $endereco): ?>
-                    <tr>
-                        <td>
-                            <?= $endereco->getLogradouro(); ?>
-                        </td>
-                        <td>
-                            <?= $endereco->getNumero(); ?>
-                        </td>
-                        <td>
-                            <?= $endereco->getComplemento(); ?>
-                        </td>
-                        <td>
-                            <?= $endereco->getBairro(); ?>
-                        </td>
-                        <td>
-                            <?= $endereco->getCidade(); ?>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <?= $endereco->getLogradouro(); ?>
+                            </td>
+                            <td>
+                                <?= $endereco->getNumero(); ?>
+                            </td>
+                            <td>
+                                <?= $endereco->getComplemento(); ?>
+                            </td>
+                            <td>
+                                <?= $endereco->getBairro(); ?>
+                            </td>
+                            <td>
+                                <?= $endereco->getCidade(); ?>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -211,14 +211,14 @@
                 </thead>
                 <tbody>
                     <?php foreach ($documentos as $documento): ?>
-                    <tr>
-                        <td>
-                            <?= $documento->getTipoDocumento()->getDescricao(); ?>
-                        </td>
-                        <td>
-                            <a href="<?= base_url($documento->getPath()); ?>" target="_blank" class="btn btn-sm btn-primary">Visualizar</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <?= $documento->getTipoDocumento()->getDescricao(); ?>
+                            </td>
+                            <td>
+                                <a href="<?= base_url($documento->getPath()); ?>" target="_blank" class="btn btn-sm btn-primary">Visualizar</a>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -240,30 +240,30 @@
                 </thead>
                 <tbody>
                     <?php foreach ($dependentes as $dependente): ?>
-                    <tr>
-                        <td>
-                            <?= $dependente->getNome(); ?>
-                        </td>
-                        <td>
-                            <?= $dependente->getNascimento(true); ?>
-                        </td>
-                        <td>
-                            <?= $dependente->getCpf(); ?>
-                        </td>
-                        <td>
-                            <?= $dependente->getParentesco(); ?>
-                        </td>
-                        <td>
-                            <button type="button" data-dependente="<?=$dependente->getId();?>" data-edit="false" class="btn btn-sm btn-outline-primary">
-                                <i class="material-icons">folder_open</i>
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary btn-sm load-photo" data-dependente-id="<?= $dependente->getId(); ?>">
-                                <i class="material-icons">photo_camera</i>
-                            </button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <?= $dependente->getNome(); ?>
+                            </td>
+                            <td>
+                                <?= $dependente->getNascimento(true); ?>
+                            </td>
+                            <td>
+                                <?= $dependente->getCpf(); ?>
+                            </td>
+                            <td>
+                                <?= $dependente->getParentesco(); ?>
+                            </td>
+                            <td>
+                                <button type="button" data-dependente="<?= $dependente->getId(); ?>" data-edit="false" class="btn btn-sm btn-outline-primary">
+                                    <i class="material-icons">folder_open</i>
+                                </button>
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-outline-primary btn-sm load-photo" data-dependente-id="<?= $dependente->getId(); ?>">
+                                    <i class="material-icons">photo_camera</i>
+                                </button>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>

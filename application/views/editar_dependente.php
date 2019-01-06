@@ -19,10 +19,10 @@
         <div class="col-sm form-group">
             <label>Grau de parentesco</label>
             <select class="form-control" name="parentesco" required="">
-                <option value="Filho" <?=($dependente->getParentesco() == 'Filho') ? 'selected' : ''; ?>>Filho(a)</option>
-                <option value="Conjuge" <?=($dependente->getParentesco() == 'Conjuge') ? 'selected' : ''; ?>>Cônjuge</option>
-                <option value="Pais" <?=($dependente->getParentesco() == 'Pais') ? 'selected' : ''; ?>>Pai ou mãe</option>
-                <option value="Outros" <?=($dependente->getParentesco() == 'Outros') ? 'selected' : ''; ?>>Outros</option>
+                <option value="Filho" <?= ($dependente->getParentesco() == 'Filho') ? 'selected' : ''; ?>>Filho(a)</option>
+                <option value="Conjuge" <?= ($dependente->getParentesco() == 'Conjuge') ? 'selected' : ''; ?>>Cônjuge</option>
+                <option value="Pais" <?= ($dependente->getParentesco() == 'Pais') ? 'selected' : ''; ?>>Pai ou mãe</option>
+                <option value="Outros" <?= ($dependente->getParentesco() == 'Outros') ? 'selected' : ''; ?>>Outros</option>
             </select>
         </div>
     </div>

@@ -5,7 +5,7 @@
             <label for="perfil">Selecione o perfil e clique em continuar.</label>
             <select name="perfil" id="perfil" class="custom-select">
                 <?php foreach ($perfis as $perfil): ?>
-                <option value="<?= $perfil->getId(); ?>"><?= $perfil->getDescricao(); ?></option>
+                    <option value="<?= $perfil->getId(); ?>"><?= $perfil->getDescricao(); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

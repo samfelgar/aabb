@@ -11,7 +11,7 @@
             <label for="tipo-documento">Tipo de documento</label>
             <select name="tipo-documento" id="tipo-documento" class="custom-select">
                 <?php foreach ($tipoDocumento as $tipo): ?>
-                <option value="<?= $tipo->getId(); ?>"><?= $tipo->getDescricao(); ?></option>
+                    <option value="<?= $tipo->getId(); ?>"><?= $tipo->getDescricao(); ?></option>
                 <?php endforeach; ?>
             </select>
         </div>

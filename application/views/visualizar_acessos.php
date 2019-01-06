@@ -19,10 +19,10 @@
                         <?php foreach ($menusInativos as $keyMenu => $menuInativo): ?>
                             <?php foreach ($menuInativo as $indexMenu => $menuValue): ?>
                                 <?php
-                                    $marginLeftInativos = false;
-                                    if ($menuInativo[0]->getId() == $keyMenu) {
-                                        $marginLeftInativos = true;
-                                    }
+                                $marginLeftInativos = false;
+                                if ($menuInativo[0]->getId() == $keyMenu) {
+                                    $marginLeftInativos = true;
+                                }
                                 ?>
                                 <div class="form-check <?= (!empty($menuValue->getMenu()) && $marginLeftInativos) ? 'ml-4' : ''; ?>">
                                     <input type="checkbox" class="form-check-input" id="<?= $menuValue->getId(); ?>" name="menus[]" value="<?= $menuValue->getId(); ?>">
@@ -57,10 +57,10 @@
                         <?php foreach ($menusAtivos as $keyMenu => $menuAtivo): ?>
                             <?php foreach ($menuAtivo as $indexMenu => $menuValue): ?>
                                 <?php
-                                    $marginLeftAtivos = false;
-                                    if ($menuAtivo[0]->getId() == $keyMenu) {
-                                        $marginLeftAtivos = true;
-                                    }
+                                $marginLeftAtivos = false;
+                                if ($menuAtivo[0]->getId() == $keyMenu) {
+                                    $marginLeftAtivos = true;
+                                }
                                 ?>
                                 <div class="form-check <?= (!empty($menuValue->getMenu()) && $marginLeftAtivos) ? 'ml-4' : ''; ?>">
                                     <input type="checkbox" class="form-check-input" id="<?= $menuValue->getId(); ?>" name="menus[]" value="<?= $menuValue->getId(); ?>">

@@ -1,32 +1,32 @@
 <div class="modal fade" id="warning-modal" tabindex="-1" role="dialog" aria-labelledby="warning-modal" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>1) Somente serão gravados no sistema os valores equivalentes ao plano do associado, 
-            demais valores deverão ser cadastrados individualmente. <br>
-            2) Somente serão gravados os registros cujo código de retorno for igual a 00 - Débito efetuado. <br>
-            3) A identificação do cliente é a mesma informada no aplicativo Débito Automático (Banco do Brasil).
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Entendi</button>
-      </div>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Atenção</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>1) Somente serão gravados no sistema os valores equivalentes ao plano do associado, 
+                    demais valores deverão ser cadastrados individualmente. <br>
+                    2) Somente serão gravados os registros cujo código de retorno for igual a 00 - Débito efetuado. <br>
+                    3) A identificação do cliente é a mesma informada no aplicativo Débito Automático (Banco do Brasil).
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Entendi</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <h3 class="text-primary">Lançamentos do arquivo de retorno</h3>
 <hr>
 <form action="<?= base_url('financeiro/gravar_lancamentos_retorno/'); ?>" method="post" class="dt-form">
     <p class="text-muted"><small>1) Somente serão gravados no sistema os valores equivalentes ao plano do associado, 
-    demais valores deverão ser cadastrados individualmente. <br>
-    2) Somente serão gravados os registros cujo código de retorno for igual a 00 - Débito efetuado. <br>
-    3) A identificação do cliente é a mesma informada no aplicativo Débito Automático (Banco do Brasil).</small></p>
+            demais valores deverão ser cadastrados individualmente. <br>
+            2) Somente serão gravados os registros cujo código de retorno for igual a 00 - Débito efetuado. <br>
+            3) A identificação do cliente é a mesma informada no aplicativo Débito Automático (Banco do Brasil).</small></p>
     <div class="row">
         <div class="form-group col-sm">
             <button type="submit" class="btn btn-primary">Gerar lançamentos</button>
@@ -42,11 +42,11 @@
         <div class="col-sm form-group">
             <table class="table table-responsive-sm table-sm">
                 <thead>
-                    <th>Identificação do cliente</th>
-                    <th>Agência</th>
-                    <th>Valor</th>
-                    <th>Data</th>
-                    <th>Código de retorno</th>
+                <th>Identificação do cliente</th>
+                <th>Agência</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Código de retorno</th>
                 </thead>
                 <tbody>     
                     <?php foreach ($registros as $registro): ?>

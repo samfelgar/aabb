@@ -10,13 +10,13 @@
     <div class="col-sm form-group">
         <table class="table table-sm table-responsive-lg table-hover">
             <thead>
-                <th>#</th>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Agência</th>
-                <th>Conta</th>
-                <th>Data</th>
-                <th>Valor</th>
+            <th>#</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Agência</th>
+            <th>Conta</th>
+            <th>Data</th>
+            <th>Valor</th>
             </thead>
             <tbody>
                 <?php if (count($resultados[0]) > 0) : ?>
@@ -47,12 +47,12 @@
     <div class="col-sm form-group">
         <table class="table table-sm table-hover">
             <thead>
-                <th>#</th>
-                <th>Conta</th>
-                <th>Agência</th>
-                <th>Data</th>
-                <th>Valor</th>
-                <th>Razão de recusa</th>
+            <th>#</th>
+            <th>Conta</th>
+            <th>Agência</th>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Razão de recusa</th>
             </thead>
             <tbody>
                 <?php if (count($resultados[1]) > 0) : ?>
@@ -83,12 +83,12 @@
     <div class="col-sm form-group">
         <table class="table table-sm table-hover">
             <thead>
-                <th>#</th>
-                <th>Conta</th>
-                <th>Agência</th>
-                <th>Data</th>
-                <th>Valor</th>
-                <th>Mensagem de retorno</th>
+            <th>#</th>
+            <th>Conta</th>
+            <th>Agência</th>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Mensagem de retorno</th>
             </thead>
             <tbody>
                 <?php if (count($resultados[2]) > 0) : ?>
@@ -119,12 +119,12 @@
     <div class="col-sm form-group">
         <table class="table table-sm table-hover">
             <thead>
-                <th>#</th>
-                <th>Conta</th>
-                <th>Agência</th>
-                <th>Data</th>
-                <th>Valor</th>
-                <th>Mensagem de retorno</th>
+            <th>#</th>
+            <th>Conta</th>
+            <th>Agência</th>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Mensagem de retorno</th>
             </thead>
             <tbody>
                 <?php if (count($resultados[3]) > 0) : ?>
@@ -155,12 +155,12 @@
     <div class="col-sm form-group">
         <table class="table table-sm table-hover">
             <thead>
-                <th>#</th>
-                <th>Conta</th>
-                <th>Agência</th>
-                <th>Data</th>
-                <th>Valor</th>
-                <th>Mensagem de retorno</th>
+            <th>#</th>
+            <th>Conta</th>
+            <th>Agência</th>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Mensagem de retorno</th>
             </thead>
             <tbody>
                 <?php if (count($resultados[5]) > 0) : ?>
@@ -191,12 +191,12 @@
     <div class="col-sm form-group">
         <table class="table table-sm table-hover">
             <thead>
-                <th>#</th>
-                <th>Conta</th>
-                <th>Agência</th>
-                <th>Data</th>
-                <th>Valor</th>
-                <th>Mensagem de retorno</th>
+            <th>#</th>
+            <th>Conta</th>
+            <th>Agência</th>
+            <th>Data</th>
+            <th>Valor</th>
+            <th>Mensagem de retorno</th>
             </thead>
             <tbody>
                 <?php if (count($resultados[4]) > 0) : ?>

@@ -1,6 +1,6 @@
 <h3 class="text-primary">Novo associado</h3>
 <hr>
-<form method="post" action="<?=base_url('associados/salvar/');?>">
+<form method="post" action="<?= base_url('associados/salvar/'); ?>">
     <div class="form-row form-group">
         <div class="col">
             <label for="nome">Nome</label>
@@ -42,10 +42,10 @@
             <label for="plano">Plano</label>
             <select name="plano" id="plano" class="form-control" required="">
                 <?php foreach ($planos as $plano): ?>
-                <option value="<?=$plano->getId();?>">
-                    <?=$plano->getDescricao();?>
-                </option>
-                <?php endforeach;?>
+                    <option value="<?= $plano->getId(); ?>">
+                        <?= $plano->getDescricao(); ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
         </div>
     </div>

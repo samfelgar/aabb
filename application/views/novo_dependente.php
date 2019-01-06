@@ -1,7 +1,7 @@
-<h3 class="text-primary">Novo dependente de <?=$associado->getNome();?></h3>
+<h3 class="text-primary">Novo dependente de <?= $associado->getNome(); ?></h3>
 <hr>
-<form action="<?=base_url('dependentes/salvar');?>" method="post">
-    <input type="hidden" id="associado-id" name="associado-id" value="<?=$associado->getId();?>">
+<form action="<?= base_url('dependentes/salvar'); ?>" method="post">
+    <input type="hidden" id="associado-id" name="associado-id" value="<?= $associado->getId(); ?>">
     <div class="form-row">
         <div class="form-group col-sm">
             <label>Nome</label>

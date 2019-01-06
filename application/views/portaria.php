@@ -7,10 +7,10 @@
         <title>AABB - Controle de acesso</title>
         <link rel="icon" type="image/png" href="<?= base_url('favicon.png'); ?>">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="<?=base_url('assets/css/jquery-ui.css');?>">
-        <link rel="stylesheet" href="<?=base_url('assets/css/jquery-ui.theme.css');?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/jquery-ui.css'); ?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/jquery-ui.theme.css'); ?>">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" href="<?=base_url('assets/css/main.css');?>">
+        <link rel="stylesheet" href="<?= base_url('assets/css/main.css'); ?>">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -21,7 +21,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="<?=base_url('logout');?>" class="nav-link ml-auto logout">Sair</a>
+                        <a href="<?= base_url('logout'); ?>" class="nav-link ml-auto logout">Sair</a>
                     </li>
                 </ul>
             </div>
@@ -52,7 +52,7 @@
                     </div>
                 </div>
             </form>
-            <?php if (! empty($alertTxt)): ?>
+            <?php if (!empty($alertTxt)): ?>
                 <div class="row justify-content-center">
                     <div class="col-sm-6 form-group">
                         <div class="alert <?= $alertClass; ?> alert-dismissible fade show" role="alert">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             <?php endif; ?>
-            <?php if (! empty($result)): ?>
+            <?php if (!empty($result)): ?>
                 <div class="row justify-content-center">
                     <div class="col-sm-6 form-group">
                         <table class="table table-borderless table-hover">
@@ -81,7 +81,7 @@
                                 <td><?= $result->getCpf(); ?></td>
                             </tr>
                         </table>
-                        <?php if (! $pagamentos): ?>
+                        <?php if (!$pagamentos): ?>
                             <div class="alert alert-danger text-center" role="alert">
                                 <i class="material-icons text-danger">local_atm</i>
                                 Existem pendências. Peça que o associado procure a secretaria.
@@ -94,30 +94,30 @@
                     </div>
                 </div>
             <?php endif; ?>
-            <?php if (! empty($result_nome)): ?>
+            <?php if (!empty($result_nome)): ?>
                 <div class="row justify-content-center">
                     <div class="col-sm-10 form-group">
                         <table class="table table-hover">
                             <thead>
-                                <th>Nome</th>
-                                <th>CPF</th>
-                                <th>Modalidade</th>
-                                <th></th>
+                            <th>Nome</th>
+                            <th>CPF</th>
+                            <th>Modalidade</th>
+                            <th></th>
                             </thead>
                             <tbody>
-                                <?php if (! empty($result_nome[0]) || ! empty($result_nome[1])): ?>
+                                <?php if (!empty($result_nome[0]) || !empty($result_nome[1])): ?>
                                     <?php foreach ($result_nome as $records): ?>
-                                            <?php foreach ($records as $record): ?>
-                                                <tr>
-                                                    <td><?= $record->getNome(); ?></td>
-                                                    <td><?= $record->getCpf(); ?></td>
-                                                    <td><?= get_class($record); ?></td>
-                                                    <td>
-                                                        <a href="<?= base_url('portaria/visualizar/?class=' . strtolower(get_class($record)) . '&id=' . $record->getId()); ?>" 
-                                                            class="btn btn-sm btn-primary">Selecionar</a>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
+                                        <?php foreach ($records as $record): ?>
+                                            <tr>
+                                                <td><?= $record->getNome(); ?></td>
+                                                <td><?= $record->getCpf(); ?></td>
+                                                <td><?= get_class($record); ?></td>
+                                                <td>
+                                                    <a href="<?= base_url('portaria/visualizar/?class=' . strtolower(get_class($record)) . '&id=' . $record->getId()); ?>" 
+                                                       class="btn btn-sm btn-primary">Selecionar</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
                                     <?php endforeach; ?>
                                 <?php else: ?>
                                     <tr>

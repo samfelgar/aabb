@@ -17,29 +17,29 @@
     </thead>
     <tbody>
         <?php foreach ($associados as $associado): ?>
-        <tr>
-            <td>
-                <?= $associado->getNome(); ?>
-            </td>
-            <td>
-                <?= $associado->getCpf(); ?>
-            </td>
-            <td>
-                <?= $associado->getAgencia(); ?>
-            </td>
-            <td>
-                <?= $associado->getConta(); ?>
-            </td>
-            <td class="text-capitalize">
-                <?= $associado->getFormaPagamento(); ?>
-            </td>
-            <td>
-                <?= $associado->getPlano()->getDescricao(); ?>
-            </td>
-            <td>
-                <a href="<?= base_url('associados/editar/') . $associado->getId(); ?>" title="Ver mais">Detalhes</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    <?= $associado->getNome(); ?>
+                </td>
+                <td>
+                    <?= $associado->getCpf(); ?>
+                </td>
+                <td>
+                    <?= $associado->getAgencia(); ?>
+                </td>
+                <td>
+                    <?= $associado->getConta(); ?>
+                </td>
+                <td class="text-capitalize">
+                    <?= $associado->getFormaPagamento(); ?>
+                </td>
+                <td>
+                    <?= $associado->getPlano()->getDescricao(); ?>
+                </td>
+                <td>
+                    <a href="<?= base_url('associados/editar/') . $associado->getId(); ?>" title="Ver mais">Detalhes</a>
+                </td>
+            </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
