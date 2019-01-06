@@ -29,6 +29,11 @@ class Associados extends MY_Controller {
             $this->load->model('termo_adesao');
             $this->load->config('app_config');
             $this->associado->setId($id);
+            $this->load->model('lancamento');
+            $data_assinatura = new DateTime();
+            $string_data = $data_assinatura->format('d');
+            $string_data .= ' de ' . strtolower(Lancamento::MONTHS[$data_assinatura->format('m')]);
+            $string_data .= ' de ' . $data_assinatura->format('Y');
             $data = [
                 'active' => $this->active,
                 'associado' => $this->associadoDAO->listarPorId($this->associado),
@@ -36,7 +41,8 @@ class Associados extends MY_Controller {
                 'enderecos' => $this->enderecoDAO->listar($this->associado),
                 'dependentes' => $this->dependenteDAO->listar($this->associado),
                 'termo' => $this->termo_adesao->get_terms(),
-                'cidade' => $this->config->item('app_city')
+                'cidade' => $this->config->item('app_city'),
+                'data_assinatura' => $string_data
             ];
             $this->load->view('impressao_ficha_associado', $data);
         } catch (Exception $e) {

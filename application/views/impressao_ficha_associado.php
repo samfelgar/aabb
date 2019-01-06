@@ -200,7 +200,7 @@
         </div>
         <div class="row">
             <div class="col-sm form-group text-right">
-                <p><?= $cidade; ?>, <?= (new DateTime())->format('d/m/Y'); ?>.</p>
+                <p><?= $cidade; ?>, <?= $data_assinatura; ?>.</p>
             </div>
         </div>
         <div class="row">
