@@ -210,7 +210,7 @@ class Financeiro extends MY_Controller {
                     $not_found[] = $registro;
                     continue;
                 }
-                if (! $this->associado->getStatus()) {
+                if (! $associado->getStatus()) {
                     $disabled[] = $registro;
                     continue;
                 }

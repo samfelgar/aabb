@@ -165,7 +165,7 @@ class Associados extends MY_Controller {
             $this->load->model('dao/associadoDAO', 'ad');
             $this->associado->setId($id);
             $this->ad->disable($this->associado);
-            redirect('/associados');
+            redirect('/associados/editar/' . $this->associado->getId());
         } catch (Exception $e) {
             $this->error($e, $this->active);
         }
