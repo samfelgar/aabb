@@ -4,9 +4,11 @@ class MY_Controller extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        $uri = $this->uri->uri_string();
         if (!$this->verify()) {
-            redirect('/login');
+            redirect('/login/?continue=' . $uri);
         }
+        $this->load->model('user_track');
     }
 
     private function verify() {

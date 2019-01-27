@@ -1,5 +1,5 @@
 <div class="jumbotron">
-    <h1 class="display-4 text-primary">Associados</h1>
+    <h1 class="display-4 text-primary">Bem vindo!</h1>
     <p class="lead">Atualmente são <?= $totalAssociados; ?> associados em nossa base. Consulte <a href="#planos">abaixo</a> a receita esperada.</p>
 </div>
 <div class="card" style="width: 18rem;">

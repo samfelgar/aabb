@@ -3,13 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>AABB</title>
+        <title>Blue Software - Prisma Tecnologia</title>
+        <link rel="icon" type="image/png" href="<?= base_url('favicon.png'); ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css'); ?>">
         <link rel="stylesheet" href="<?= base_url('assets/css/login.css'); ?>">
     </head>
     <body>
         <div class="container">
-            <form action="<?= base_url('login/acessar'); ?>" method="post">
+            <form action="<?= base_url('login/acessar/?continue=' . $uri); ?>" method="post">
                 <h2>Bem vindo!</h2>
                 <div class="row form-group">
                     <div class="col">

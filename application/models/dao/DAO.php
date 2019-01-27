@@ -1,6 +1,6 @@
 <?php
 
-class DAO extends CI_Model {
+abstract class DAO extends CI_Model {
 
     protected $c;
 

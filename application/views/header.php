@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="theme-color" content="#007bff">
-        <title>AABB</title>
+        <title>Blue Software - Prisma Tecnologia</title>
         <link rel="icon" type="image/png" href="<?= base_url('favicon.png'); ?>">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="<?= base_url('assets/css/jquery-ui.css'); ?>">
@@ -15,7 +15,9 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a href="<?= base_url(); ?>" class="navbar-brand mb-0 h1">AABB</a>
+            <a href="<?= base_url(); ?>" class="navbar-brand mb-0 h1">
+                <img src="<?= base_url('assets/images/blue_logo_7.png'); ?>" alt="" width="30" height="30">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Expadir navegação">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,11 +43,19 @@
                             </li>
                         <?php endif; ?>
                     <?php endforeach; ?>
-                    <li class="nav-item">
-                        <a href="<?= base_url('logout'); ?>" class="nav-link logout">Sair</a>
-                    </li>
                 </ul>
                 <span class="ml-auto">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Olá, <span class="text-capitalize"><?= $_SESSION['user']; ?></span></a>
+                            <div class="dropdown-menu">
+                                <a href="<?= base_url('usuarios/alterar_senha/' . $_SESSION['user_id']); ?>" class="dropdown-item">Alterar senha</a>
+                                <a href="<?= base_url('logout'); ?>" class="dropdown-item logout">Sair</a>
+                            </div>
+                        </li>
+                    </ul>
+                </span>
+                <span class="">
                     <a href="https://correio.fenabb.org.br/" target="_blank" class="btn btn-sm btn-primary" title="E-mail FENABB">
                         <span class="d-lg-none">Acesso ao e-mail</span>
                         <i class="material-icons md-18 d-lg-none">open_in_new</i>
